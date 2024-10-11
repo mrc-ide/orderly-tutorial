@@ -1,7 +1,5 @@
 ---
-title: "Orderly-tutorial"
+title: "orderly tutorial"
 ---
 
-This is a Quarto website.
-
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+This is a site for the [orderly (orderly2)](https://mrc-ide.github.io/orderly2) tutorial.  You probably want to see the [slides](slides.qmd)
