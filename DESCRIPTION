@@ -1,0 +1,12 @@
+Package: orderly.tutorial
+Title: Orderly Tutorial
+Version: 1.0
+Authors@R: c(person("Rich", "FitzJohn", role = c("aut", "cre"),
+                    email = "rich.fitzjohn@gmail.com"),
+             person("Imperial College of Science, Technology and Medicine",
+                    role = "cph"))
+Imports:
+    orderly2
+Remotes:
+    mrc-ide/orderly2
+Encoding: UTF-8
