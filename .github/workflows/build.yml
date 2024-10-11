@@ -36,5 +36,5 @@ jobs:
         with:
           clean: false
           branch: gh-pages
-          folder: _book
+          folder: _site
           single-commit: true
