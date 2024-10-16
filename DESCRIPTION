@@ -6,7 +6,10 @@ Authors@R: c(person("Rich", "FitzJohn", role = c("aut", "cre"),
              person("Imperial College of Science, Technology and Medicine",
                     role = "cph"))
 Imports:
-    orderly2
+    fs,
+    quarto,
+    orderly2,
+    rmarkdown
 Remotes:
     mrc-ide/orderly2
 Encoding: UTF-8
