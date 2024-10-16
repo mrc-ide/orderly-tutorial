@@ -2,7 +2,24 @@
 title: "Orderly Tutorial"
 author: "Rich FitzJohn"
 format: revealjs
+execute:
+  echo: true
+  error: true
+  message: true
+  output: true
+  warning: true
+project:
+  execute-dir: workdir
 ---
+
+```{r}
+#| include: false
+#| cache: false
+source("support.R")
+unlink("workdir", recursive = TRUE)
+dir.create("workdir")
+knitr::opts_knit$set(root.dir = "workdir")
+```
 
 # What is orderly?
 
@@ -79,4 +96,63 @@ From PyPi (for Python)
 
 ```r
 pip install pyorderly
+```
+
+# My first orderly report / task
+
+. . .
+
+There is a discussion to have here about naming.  We might have this in a break...
+
+## The setup
+
+First, load the package and create a new empty orderly root.
+
+```{r}
+library(orderly2)
+orderly_init()
+```
+
+. . .
+
+What's in the box?
+
+```{r}
+fs::dir_tree()
+```
+
+## Create an empty report
+
+```{r}
+orderly_new("example")
+```
+
+...
+
+Our contents now:
+
+```{r}
+fs::dir_tree()
+```
+
+## Hello orderly world
+
+```{r}
+#| include: false
+writeLines('write.csv(data.frame(greeting = "hello", to = "world"),
+  "hello.csv")', "src/example/example.R")
+```
+
+We have edited `src/example/example.R` to contain:
+
+```{r}
+#| echo: false
+#| results: asis
+r_output(readLines("src/example/example.R"))
+```
+
+Now we run
+
+```{r}
+orderly_run("example")
 ```
