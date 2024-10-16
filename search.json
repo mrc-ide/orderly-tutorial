@@ -1,0 +1,72 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "orderly tutorial",
+    "section": "",
+    "text": "This is a site for the orderly (orderly2) tutorial. You probably want to see the slides"
+  },
+  {
+    "objectID": "slides.html#original-aims",
+    "href": "slides.html#original-aims",
+    "title": "Orderly Tutorial",
+    "section": "Original aims:",
+    "text": "Original aims:\n\n“With orderly we have two main hopes:\n\nanalysts can write code that will straightforwardly run on someone else’s machine (or a remote machine)\nwhen an analysis that is run several times starts behaving differently it will be easy to see when the outputs started changing, and what inputs started changing at the same time”\n\n\n(~ 2018)\n\norderly requires a few conventions around organisation of a project, and after that tries to keep out of your way. However, these requirements are designed to make collaborative development with git easier by minimising conflicts and making backup easier by using an append-only storage system."
+  },
+  {
+    "objectID": "slides.html#but-what-is-it",
+    "href": "slides.html#but-what-is-it",
+    "title": "Orderly Tutorial",
+    "section": "But what is it?",
+    "text": "But what is it?\n\nA package designed to make analysis more reproducible\nA way of structuring your analysis so to make it easy to understand, run and reuse\nA set of tools that make it easy to:\n\ntrack all inputs into an analysis (packages, code, and data resources)\nstore multiple versions of an analysis where it is repeated\ntrack outputs of an analysis\ncreate analyses that depend on the outputs of previous analyses"
+  },
+  {
+    "objectID": "slides.html#who-uses-it",
+    "href": "slides.html#who-uses-it",
+    "title": "Orderly Tutorial",
+    "section": "Who uses it?",
+    "text": "Who uses it?\n\nDeveloped since May 2017 for the Vaccine Impact Modelling Consortium\nUsed in the 2018-2020 DRC Ebola responses\nUsed in the COVID-19 response, especially within the “real time modelling” group\nUsed within research groups (HIV, Malaria, possibly others?)"
+  },
+  {
+    "objectID": "slides.html#historical-notes",
+    "href": "slides.html#historical-notes",
+    "title": "Orderly Tutorial",
+    "section": "Historical notes",
+    "text": "Historical notes\n\norderly (version 1)\n\nCreated for Vaccine Impact Modelling Consortium and strongly focussed on reproducible research\nUsed YAML everywhere\nSupported simple ways of working for a small centralised team\n\norderly2 (soon to be orderly 2.0.0)\n\nA complete rewrite taking the best ideas from version 1 and dropping many less useful bits\nEasier to program against\nNo more YAML\nFocusses on distributed collaborative analysis\nAlso available as a python package!"
+  },
+  {
+    "objectID": "slides.html#install-orderly2",
+    "href": "slides.html#install-orderly2",
+    "title": "Orderly Tutorial",
+    "section": "Install orderly2",
+    "text": "Install orderly2\nFrom the mrc-ide r-universe (recommended)\ninstall.packages(\n  \"orderly2\",\n  repos = c(\"https://mrc-ide.r-universe.dev\",\n            \"https://cloud.r-project.org\"))\nFrom GitHub using remotes:\nremotes::install_github(\"mrc-ide/orderly2\")\nFrom PyPi (for Python)\npip install pyorderly"
+  },
+  {
+    "objectID": "slides.html#the-setup",
+    "href": "slides.html#the-setup",
+    "title": "Orderly Tutorial",
+    "section": "The setup",
+    "text": "The setup\nFirst, load the package and create a new empty orderly root.\n\nlibrary(orderly2)\norderly_init()\n## ✔ Created orderly root at '/home/runner/work/orderly-tutorial/orderly-tutorial/workdir'\n## ✔ Wrote '.gitignore'\n\n\nWhat’s in the box?\n\nfs::dir_tree()\n## .\n## └── orderly_config.yml"
+  },
+  {
+    "objectID": "slides.html#create-an-empty-report",
+    "href": "slides.html#create-an-empty-report",
+    "title": "Orderly Tutorial",
+    "section": "Create an empty report",
+    "text": "Create an empty report\n\norderly_new(\"example\")\n## ✔ Created 'src/example/example.R'\n\n…\nOur contents now:\n\nfs::dir_tree()\n## .\n## ├── orderly_config.yml\n## └── src\n##     └── example\n##         └── example.R"
+  },
+  {
+    "objectID": "slides.html#hello-orderly-world",
+    "href": "slides.html#hello-orderly-world",
+    "title": "Orderly Tutorial",
+    "section": "Hello orderly world",
+    "text": "Hello orderly world\nWe have edited src/example/example.R to contain:\nwrite.csv(data.frame(greeting = \"hello\", to = \"world\"),\n  \"hello.csv\")\nNow we run\n\norderly_run(\"example\")\n## ℹ Starting packet 'example' `20241016-171340-b1409c6d` at 2024-10-16 17:13:40.700687\n## &gt; write.csv(data.frame(greeting = \"hello\", to = \"world\"),\n## +   \"hello.csv\")\n## ✔ Finished running 'example.R'\n## ℹ Finished 20241016-171340-b1409c6d at 2024-10-16 17:13:40.756922 (0.05623579 secs)\n## [1] \"20241016-171340-b1409c6d\""
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "This is a tutorial site for orderly; it uses orderly2, which should become version 2.0.0 of orderly on CRAN early 2025."
+  }
+]
