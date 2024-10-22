@@ -19,7 +19,7 @@ project:
 #| cache: false
 source("support.R")
 unlink("workdir", recursive = TRUE)
-if (!file.exists("inputs/part3/cases.csv.xz")) {
+if (!file.exists("inputs/part3/cases/all.rds")) {
   sys.source("inputs/part3/prep.R", new.env())
 }
 ```
@@ -550,12 +550,12 @@ local({
   fs::file_copy("inputs/part3/cases.R",
                 file.path(path_upstream, "src/cases/cases.R"),
                 overwrite = TRUE)
-  re <- "cases-(.+)-2020\\.csv"
-  files <- dir("inputs/part3", re)
+  re <- "^(.+)-2020\\.csv$"
+  files <- dir("inputs/part3/cases", re)
   regions <- sub(re, "\\1", files)
   names(files) <- regions
   for (region in regions) {
-    fs::file_copy(file.path("inputs/part3", files[[region]]),
+    fs::file_copy(file.path("inputs/part3/cases", files[[region]]),
                   file.path(path_upstream, "src/cases/cases.csv"),
                   overwrite = TRUE)
     orderly_run("cases", list(region = region, year = 2020), root = path_upstream)
@@ -591,10 +591,12 @@ orderly_metadata_extract(
 
 ## Depending on this
 
+
+
 ## Thom has new data for us!
 
 ```{r, echo = TRUE}
-fs::file_copy("inputs/part3/cases-london-2021.csv",
+fs::file_copy("inputs/part3/cases/london-2021.csv",
               file.path("workdir/part3-upstream", "src/cases/cases.csv"),
               overwrite = TRUE)
 orderly_run("cases", list(region = "london", year = 2021),

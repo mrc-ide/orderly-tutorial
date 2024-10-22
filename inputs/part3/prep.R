@@ -8,8 +8,10 @@ d <- d[order(d$Region, d$areaName, d$Week), ]
 rownames(d) <- NULL
 d$date_begin <- as.Date(d$date_begin, "%d/%m/%Y")
 
+dir.create("inputs/part3/cases", FALSE, TRUE)
+
 ## The whole thing
-saveRDS(d, "inputs/part3/cases.rds")
+saveRDS(d, "inputs/part3/cases/all.rds")
 
 regions <- unique(d$Region)
 
@@ -19,7 +21,7 @@ for (year in 2020:2022) {
     dsub <- d[d$Region == region & d$date_begin <= as.Date("2020-12-31"), ]
     rownames(dsub) <- NULL
     write.csv(dsub,
-              sprintf("inputs/part3/cases-%s-%d.csv", region, year),
+              sprintf("inputs/part3/cases/%s-%d.csv", region, year),
               row.names = FALSE)
   }
 }
