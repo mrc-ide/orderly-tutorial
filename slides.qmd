@@ -536,8 +536,12 @@ Sys.setenv(ORDERLY_ROOT = "workdir/part3")
 
 Thom Rawson has kindly set up a bunch of case data for us to use.  He's put it in an orderly root that we can use as **an orderly location**.
 
+## The sausage factory
+
+We'll hide this in the final build
+
 ```{r}
-#| include: false
+#| include: true
 local({
   path_upstream <- "workdir/part3-upstream"
   orderly_init(path_upstream)
