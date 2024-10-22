@@ -1,20 +1,25 @@
-d <- read.csv("inputs/part3/raw/cases.csv", row.names = 1)
-convert <- read.csv("inputs/part3/raw/ltla-to-region.csv")
+d <- read.csv("inputs/part3/raw/cases.csv.xz", row.names = 1)
+convert <- read.csv("inputs/part3/raw/regions.csv")
 
 i <- match(d$areaCode, convert$LAD21CD)
-d2 <- cbind(Region = convert$RGN21NM[i], d)
-d2 <- d2[!is.na(i), ]
-d2 <- d2[order(d2$Region, d2$areaName, d2$Week), ]
-rownames(d2) <- NULL
-d2$date_begin <- as.Date(d2$date_begin, "%d/%m/%Y")
+d <- cbind(Region = convert$RGN21NM[i], d)
+d <- d[!is.na(i), ]
+d <- d[order(d$Region, d$areaName, d$Week), ]
+rownames(d) <- NULL
+d$date_begin <- as.Date(d$date_begin, "%d/%m/%Y")
 
-saveRDS(d2, "inputs/part3/cases.rds")
+## The whole thing
+saveRDS(d, "inputs/part3/cases.rds")
 
-d_2020 <- d2[d$date_begin <= as.Date("2020-12-31"), ]
-saveRDS(split(d_2020, d_2020$Region), "inputs/part3/cases-2020.rds")
+regions <- unique(d$Region)
 
-d_2021 <- d2[d$date_begin <= as.Date("2021-12-31"), ]
-saveRDS(split(d_2021, d_2021$Region), "inputs/part3/cases-2021.rds")
-
-d_2022 <- d2[d$date_begin <= as.Date("2022-12-31"), ]
-saveRDS(split(d_2022, d_2022$Region), "inputs/part3/cases-2022.rds")
+## Split versions for us to easily use as inputs to reports:
+for (year in 2020:2022) {
+  for (region in regions) {
+    dsub <- d[d$Region == region & d$date_begin <= as.Date("2020-12-31"), ]
+    rownames(dsub) <- NULL
+    write.csv(dsub,
+              sprintf("inputs/part3/cases-%s-%d.csv", region, year),
+              row.names = FALSE)
+  }
+}
