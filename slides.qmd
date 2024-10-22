@@ -6,7 +6,7 @@ format:
     preview-links: auto
 execute:
   echo: true
-  error: true
+  error: false
   message: true
   output: true
   warning: true
@@ -18,9 +18,10 @@ project:
 #| include: false
 #| cache: false
 source("support.R")
-unlink("workdir/part1", recursive = TRUE)
-unlink("workdir/part2", recursive = TRUE)
-unlink("workdir/part3", recursive = TRUE)
+unlink("workdir", recursive = TRUE)
+if (!file.exists("inputs/part3/cases.csv.xz")) {
+  sys.source("inputs/part3/prep.R", new.env())
+}
 ```
 
 # What is orderly?
@@ -536,8 +537,37 @@ Sys.setenv(ORDERLY_ROOT = "workdir/part3")
 Thom Rawson has kindly set up a bunch of case data for us to use.  He's put it in an orderly root that we can use as **an orderly location**.
 
 ```{r}
+#| include: false
+local({
+  path_upstream <- "workdir/part3-upstream"
+  orderly_init(path_upstream)
+  orderly_init(path_upstream)
+  orderly_new("cases", root = path_upstream)
+  fs::file_copy("inputs/part3/cases.R",
+                file.path(path_upstream, "src/cases/cases.R"),
+                overwrite = TRUE)
+  re <- "cases-(.+)-2020\\.csv"
+  files <- dir("inputs/part3", re)
+  regions <- sub(re, "\\1", files)
+  names(files) <- regions
+  for (region in regions) {
+    fs::file_copy(file.path("inputs/part3", files[[region]]),
+                  file.path(path_upstream, "src/cases/cases.csv"),
+                  overwrite = TRUE)
+    orderly_run("cases", list(region = region, year = 2020), root = path_upstream)
+  }
+})
+```
+
+## Adding a location
+
+```{r}
 orderly_location_add_path("thom", "workdir/part3-upstream")
 ```
+
+* Here we have used the `path` location type
+* We will try this with the `packit` type in the workshop
+* Locations are just another orderly root where you can find packets
 
 ## What has Thom been up to?
 
@@ -555,13 +585,14 @@ orderly_metadata_extract(
               year = "parameters.year is number"))
 ```
 
+## Depending on this
+
 ## Thom has new data for us!
 
 ```{r, echo = TRUE}
-d <- readRDS("inputs/part3/cases-2021.rds")
-write.csv(d$london,
-          file.path(path_upstream, "src/cases/cases.csv"),
-          row.names = FALSE)
+fs::file_copy("inputs/part3/cases-london-2021.csv",
+              file.path("workdir/part3-upstream", "src/cases/cases.csv"),
+              overwrite = TRUE)
 orderly_run("cases", list(region = "london", year = 2021),
             root = "workdir/part3-upstream")
 ```
