@@ -7,9 +7,18 @@
 ## ```{r, include = FALSE}
 ## ...
 ## ```
-
-dir_tree <- function(path, sub = ".", ...) {
-  withr::with_dir(path, fs::dir_tree(sub, ...))
+dir_tree <- function(path = ".", sub = ".", all = FALSE,
+                     ignore_outpack = TRUE, ...) {
+  if (all && ignore_outpack) {
+    regexp <- "^\\.outpack"
+    invert <- TRUE
+  } else {
+    regexp <- NULL
+    invert <- FALSE
+  }
+  withr::with_dir(
+    path,
+    fs::dir_tree(sub, all = all, regexp = regexp, invert = invert, ...))
 }
 
 lang_output <- function(x, lang) {
@@ -37,14 +46,3 @@ inline <- function(x) {
 
 knitr::opts_chunk$set(
   collapse = TRUE)
-
-.here <- getwd()
-knitr::knit_hooks$set(inwd = function(before, options) {
-  if (before) {
-    setwd(options$inwd)
-  } else {
-    setwd(.here)
-  }
-  invisible()
-}
-)

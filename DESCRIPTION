@@ -7,8 +7,10 @@ Authors@R: c(person("Rich", "FitzJohn", role = c("aut", "cre"),
                     role = "cph"))
 Imports:
     fs,
+    gert,
     quarto,
     orderly2,
+    readxl,
     rmarkdown
 Remotes:
     mrc-ide/orderly2
