@@ -10,4 +10,9 @@ This is a site for the [orderly (orderly2)](https://mrc-ide.github.io/orderly2) 
 1. [Collaboration](slides/collaboration.qmd)
 1. [Other topics](slides/other-topics.qmd)
 
-We will add more soon!
+During the tutorial we will use some datasets.  You should download these to your computer and copy them around as we build a project.
+
+<!-- It would be nice to bundle these into the quarto site, but I have not looked at how to do that yet. -->
+
+* [Vaccine coverage of Blue and Green Fever](https://github.com/mrc-ide/orderly-tutorial/raw/refs/heads/main/inputs/part2/data.xlsx)
+* [WUENIC coverage data](https://github.com/mrc-ide/orderly-tutorial/raw/refs/heads/main/inputs/part2/wuenic.xlsx)

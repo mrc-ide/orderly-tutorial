@@ -272,6 +272,54 @@ with metadata
 orderly_metadata(id)$depends
 ```
 
+## A more realistic example {.smaller}
+
+```{r}
+orderly_new("wuenic")
+```
+
+```{r}
+#| include: false
+fs::file_copy("inputs/part2/wuenic.xlsx", "workdir/part2/src/wuenic")
+fs::file_copy("inputs/part2/wuenic.R", "workdir/part2/src/wuenic", overwrite = TRUE)
+```
+
+A real analysis courtesty of [Katy Gaythorpe](https://profiles.imperial.ac.uk/k.gaythorpe)
+
+```{r}
+#| echo: false
+#| results: asis
+r_output(readLines("workdir/part2/src/wuenic/wuenic.R"))
+```
+
+## Running this
+
+```{r}
+id <- orderly_run("wuenic", echo = FALSE)
+```
+
+## The result
+
+```{r}
+fs::dir_tree("workdir/part2/archive/wuenic")
+```
+
+## In graphical form
+
+```{r}
+#| output: asis
+#| echo: false
+# (we need the .. here because paths are terrible)
+path_image <- file.path("../workdir/part2/archive/wuenic", id,
+                        "BCG_YF_correlation_comparison.png")
+writeLines(sprintf("![](%s)", path_image))
+```
+
+## Remaining questions
+
+* Where do we put our starting data?
+* How do we use Katy's processed data `wuenic.rds`?
+
 ## Next steps:
 
 * On to [collaboration](collaboration.html)

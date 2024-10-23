@@ -178,7 +178,7 @@ id <- orderly_run("analysis", location = "thom") # or allow_remote = TRUE
 ```{r}
 #| output: asis
 #| echo: false
-path_image <- file.path("workdir/part3/archive/analysis", id, "london.png")
+path_image <- file.path("../workdir/part3/archive/analysis", id, "london.png")
 writeLines(sprintf("![](%s)", path_image))
 ```
 
