@@ -1,0 +1,9 @@
+format:
+  revealjs:
+    preview-links: auto
+    footer: "[mrc-ide/orderly-tutorial](..)"
+execute:
+  echo: true
+  message: true
+  output: true
+  warning: true

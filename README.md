@@ -26,6 +26,8 @@ The site will build when pushed to GitHub, so failures will show on a PR.  It wi
 
 Documentation for quarto is [here](https://quarto.org/docs/guide/) and for revealjs presentations specifically [here](https://quarto.org/docs/presentations/revealjs/)
 
+## Quirks that I have bashed into this attempt:
+
 Links between parts of the site:
 
 * From a *non-slide* `.qmd` you can use `whatever.qmd` as a target and it will work fine

@@ -4,8 +4,10 @@ title: "orderly tutorial"
 
 This is a site for the [orderly (orderly2)](https://mrc-ide.github.io/orderly2) tutorial.  There are a series of slide decks designed to run one after another:
 
-1. [Introduction](intro.qmd)
-1. [Getting started](getting-started.qmd)
-1. [Writing orderly code](orderly-code.qmd)
-1. [Collaboration](collaboration.qmd)
-1. [Other topics](the-rest.qmd)
+1. [Introduction](slides/intro.qmd)
+1. [Getting started](slides/getting-started.qmd)
+1. [Writing orderly code](slides/orderly-code.qmd)
+1. [Collaboration](slides/collaboration.qmd)
+1. [Other topics](slides/other-topics.qmd)
+
+We will add more soon!

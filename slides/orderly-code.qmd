@@ -271,3 +271,9 @@ with metadata
 ```{r}
 orderly_metadata(id)$depends
 ```
+
+## Next steps:
+
+* On to [collaboration](collaboration.html)
+* Back to the [project root](..)
+* Back to the [geting started](getting-started.html)

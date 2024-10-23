@@ -65,3 +65,8 @@ source("support.R")
 * Save some inputs?
 * Don't save secrets
 * Don't save locations
+
+## Next steps
+
+* Back to the [project root](..)
+* Back to [collaboration](collaboration.html)

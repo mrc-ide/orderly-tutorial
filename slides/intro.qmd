@@ -1,15 +1,6 @@
 ---
 title: "Orderly Tutorial"
 author: "MRC Centre for Global Infectious Disease Analysis"
-format:
-  revealjs:
-    preview-links: auto
-    footer: "[mrc-ide/orderly-tutorial](https://mrc-ide.github.io/orderly-tutorial)"
-execute:
-  echo: true
-  message: true
-  output: true
-  warning: true
 ---
 
 ```{r}
@@ -69,3 +60,8 @@ orderly requires a few conventions around organisation of a project, and after t
   - No more YAML
   - Focusses on **distributed collaborative analysis**
   - Also available as a [python package](https://pypi.org/project/pyorderly/)!
+
+## Next steps:
+
+* On to [getting started](getting-started.html)
+* Back to the [project root](..)

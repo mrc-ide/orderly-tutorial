@@ -217,3 +217,9 @@ This time we try pulling
 orderly_location_pull_packet("latest", name = "cases", location = "thom")
 id <- orderly_run("analysis")
 ```
+
+## Next steps
+
+* On to [other topics](other-topics.html)
+* Back to the [project root](..)
+* Back to [writing orderly code](orderly-code.html)
