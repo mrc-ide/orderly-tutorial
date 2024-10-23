@@ -32,3 +32,11 @@ Links between parts of the site:
 
 * From a *non-slide* `.qmd` you can use `whatever.qmd` as a target and it will work fine
 * From the slides this won't work, and I can't find a good reason why or discussion of a workaround. Include a manual link to the final rendered version.
+
+## Data sources
+
+# Data sources
+
+* `inputs/part2/wuenic.xlsx` comes from [the WHO](https://immunizationdata.who.int/compare?GROUP=Countries&COMPARISON=type1__WIISE/MT_AD_COV_LONG+type2__WIISE/MT_AD_COV_LONG+option1__BCG_coverage+option2__YFV_coverage&YEAR=)
+* `inputs/part2/data.xlsx` is entirely synthetic
+* `inputs/part3/cases.csv.xz` from [Rawson et al. (2024)](https://doi.org/10.1371/journal.pcbi.1012141) and [associated orderly1 project](https://github.com/thomrawson/Rawson-spatial-covid)
