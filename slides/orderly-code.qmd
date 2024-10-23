@@ -320,7 +320,7 @@ writeLines(sprintf("![](%s)", path_image))
 * Where do we put our starting data?
 * How do we use Katy's processed data `wuenic.rds`?
 
-## Next steps:
+## Next steps
 
 * On to [collaboration](collaboration.html)
 * Back to the [project root](..)

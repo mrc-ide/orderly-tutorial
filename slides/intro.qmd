@@ -61,7 +61,7 @@ orderly requires a few conventions around organisation of a project, and after t
   - Focusses on **distributed collaborative analysis**
   - Also available as a [python package](https://pypi.org/project/pyorderly/)!
 
-## Next steps:
+## Next steps
 
 * On to [getting started](getting-started.html)
 * Back to the [project root](..)

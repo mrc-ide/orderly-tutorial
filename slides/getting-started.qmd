@@ -193,7 +193,7 @@ orderly_metadata_extract()
 
 (more on this later).
 
-## Next steps:
+## Next steps
 
 * On to [writing orderly code](orderly-code.html)
 * Back to the [project root](..)
