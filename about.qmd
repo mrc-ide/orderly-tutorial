@@ -7,7 +7,7 @@ This is a tutorial site for orderly; it uses [`orderly2`](https://mrc-ide.github
 ```{r}
 #| include: false
 pkgs <- c("orderly2", "cli", "fs", "gert", "httr2", "jsonlite", "openssl",
-          "rlang", "withr", "yaml", "jsonvalidate")
+          "rlang", "withr", "yaml")
 for (p in pkgs) {
   loadNamespace(p)
 }
