@@ -1,0 +1,273 @@
+---
+title: "Orderly Code"
+format:
+  revealjs:
+    preview-links: auto
+execute:
+  echo: true
+  message: true
+  output: true
+  warning: true
+---
+
+```{r}
+#| include: false
+#| cache: false
+source("support.R")
+unlink("workdir/part2", recursive = TRUE)
+```
+
+## What can I do?
+
+* orderly code is any code you can use from R
+* Use (almost) any package, any sort of file
+
+But...
+
+* The directory above your file **does not exist**
+* Don't use absolute paths or `../` path fragments
+* You can add metadata to help future you/others
+
+## A clean beginning
+
+```{r}
+library(orderly2)
+orderly_init("workdir/part2")
+```
+
+```{r}
+#| include: false
+Sys.setenv(ORDERLY_ROOT = "workdir/part2")
+```
+
+Suppose we're working on a data analysis pipeline, starting with "incoming data":
+
+```{r}
+orderly_new("incoming")
+```
+
+Our setup:
+
+```{r}
+fs::dir_tree("workdir/part2")
+```
+
+## Incoming data {.smaller}
+
+```{r}
+#| include: false
+fs::file_copy("inputs/part2/data.xlsx", "workdir/part2/src/incoming")
+fs::file_copy("inputs/part2/incoming-1.R",
+              "workdir/part2/src/incoming/incoming.R", overwrite = TRUE)
+```
+
+I've copied some data in as `data.xlsx` into `src/incoming`.
+
+```{r}
+fs::dir_tree("workdir/part2")
+```
+
+* Modify `incoming.R` to tidy that up for consumption using your favourite packages.
+* Set your working directory to `src/incoming` and just edit things as usual
+* Which sheet contains the data?
+* Where is the data in that sheet?
+* Do you like those column names?
+* How about that date format?
+
+## Incoming data, cleaned
+
+My attempt at cleaning:
+
+```{r}
+#| echo: false
+#| results: asis
+r_output(readLines("workdir/part2/src/incoming/incoming.R"))
+```
+
+* Read in the data
+* Clean up the names (could have used `janitor`)
+* Convert date format
+* Write as `csv`
+
+## Incoming data, running things {.smaller}
+
+```{r}
+id <- orderly_run("incoming")
+```
+
+Our generated metadata (this output box scrolls)
+
+```{r}
+orderly_metadata(id)
+```
+
+## "Resources"
+
+* Any file that is an **input**
+* For example:
+  - Scripts that you `source()`
+  - R Markdown files for `knitr` or `rmarkdown`
+  - Data files (`.csv`, `.xlsx`, etc)
+  - Plain text files (`README.md`, licence info, etc)
+* Here, `data.xlsx` is an input
+
+## Telling orderly about resources {.smaller}
+
+```{r}
+#| include: false
+fs::file_copy("inputs/part2/incoming-2.R",
+              "workdir/part2/src/incoming/incoming.R", overwrite = TRUE)
+```
+```{r}
+#| echo: false
+#| results: asis
+r_output(readLines("workdir/part2/src/incoming/incoming.R"))
+```
+
+. . .
+
+* Tells orderly `data.xlsx` is a **resource**
+* Fail early if resource not found
+* Error if resource is modified
+* Extra metadata, advertising what files **were used**
+
+. . .
+
+```{r}
+id <- orderly_run("incoming")
+orderly_metadata(id)$custom$orderly$role
+```
+
+## "Artefacts"
+
+* Any file that is an **output**
+* For example:
+  - Datasets you generate
+  - html or pdf output from `knitr` or `rmarkdown`
+  - Plain text files
+  - Inputs themselves, sometimes
+* Here, `data.csv` is an artefact
+
+## Telling orderly about artefacts {.smaller}
+
+```{r}
+#| include: false
+fs::file_copy("inputs/part2/incoming-3.R",
+              "workdir/part2/src/incoming/incoming.R", overwrite = TRUE)
+```
+```{r}
+#| echo: false
+#| results: asis
+r_output(readLines("workdir/part2/src/incoming/incoming.R"))
+```
+
+. . .
+
+* Tells orderly `csv.xlsx` is an **artefact**
+* Fail if artefact not produced
+* Extra metadata, advertising what files **were produced**
+
+. . .
+
+```{r}
+id <- orderly_run("incoming")
+orderly_metadata(id)$custom$orderly$artefacts
+```
+
+## More metadata {.smaller}
+
+```{r}
+#| include: false
+fs::file_copy("inputs/part2/incoming-4.R",
+              "workdir/part2/src/incoming/incoming.R", overwrite = TRUE)
+```
+```{r}
+#| echo: false
+#| results: asis
+r_output(readLines("workdir/part2/src/incoming/incoming.R"))
+```
+
+Running this:
+
+```{r}
+id <- orderly_run("incoming", echo = FALSE)
+orderly_metadata(id)$custom$orderly$description
+```
+
+## Dependencies
+
+* This is really the point of orderly
+* You can pull in any file from any previously run packet
+* You can use queries to select packets to depend on
+
+**Our aim**: We want to use `data.csv` in some analysis
+
+```{r}
+orderly_new("analysis")
+```
+
+## Setting up a dependency
+
+```{r}
+#| include: false
+fs::file_copy("inputs/part2/analysis.R",
+              "workdir/part2/src/analysis/analysis.R", overwrite = TRUE)
+```
+```{r}
+#| echo: false
+#| results: asis
+r_output(readLines("workdir/part2/src/analysis/analysis.R"))
+```
+
+This is the only file within our analysis directory:
+
+```{r}
+fs::dir_tree("workdir/part2/src/analysis")
+```
+
+## Running the report {.smaller}
+
+```{r}
+id <- orderly_run("analysis")
+```
+
+## The aftermath {.smaller}
+
+```{r}
+fs::dir_tree("workdir/part2")
+```
+
+## Some comments on this
+
+* The `data.csv` file has been copied from the final copy of `incoming` into `analysis`
+* The dependency system works interactively too (try it!)
+* The logs indicate how dependency resolution occurred
+* Metadata about the dependencies is included:
+
+```{r}
+orderly_metadata(id)$depends
+```
+
+## Using specific versions
+
+```{r}
+#| echo: false
+#| results: asis
+id_old <- orderly_search(name = "incoming")[[2]]
+code <- readLines("workdir/part2/src/analysis/analysis.R")
+writeLines(sub("latest", id_old, code),
+           "workdir/part2/src/analysis/analysis.R")
+r_output(readLines("workdir/part2/src/analysis/analysis.R"))
+```
+
+## Running this {.smaller}
+
+```{r}
+id <- orderly_run("analysis")
+```
+
+with metadata
+
+```{r}
+orderly_metadata(id)$depends
+```

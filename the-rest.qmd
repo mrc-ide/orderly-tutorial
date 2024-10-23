@@ -1,0 +1,67 @@
+---
+title: "The rest"
+format:
+  revealjs:
+    preview-links: auto
+execute:
+  echo: true
+  message: true
+  output: true
+  warning: true
+---
+
+```{r}
+#| include: false
+#| cache: false
+source("support.R")
+```
+
+## Documentation
+
+[The orderly reference](https://mrc-ide.github.io/orderly2/reference/index.html#from-within-a-running-report){preview-link="true"}
+
+# Details for writing reports/tasks
+
+* Shared resources
+* Resources
+* Loops over dependencies
+* Metadata
+
+# What is saved?
+
+* Information about files you consumed, and produced
+
+# Ways of collaborating
+
+# Assorted issues
+
+## Misc
+
+* How to get data into orderly in the first place
+  - git versioned files
+  - git ignored files
+  - files from canonical locations
+  - databases
+* Coping with failure
+* Running knitr/rmarkdown
+* Getting files out of orderly
+
+## The right number of packets
+
+* Similar to "how big is a git repo"
+* Some issues:
+  * People fragmenting packets to overcome flakey analysis
+  * Millions of packets, leading to complex and slow queries
+  * Hard to get the right combination of packets
+
+## The right number of parameters
+
+* Too few is too inflexible
+* Too many becomes annoying quite quickly
+
+## Interaction with git
+
+* Don't save outputs
+* Save some inputs?
+* Don't save secrets
+* Don't save locations

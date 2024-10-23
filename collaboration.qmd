@@ -1,0 +1,219 @@
+---
+title: "Orderly Collaboration"
+format:
+  revealjs:
+    preview-links: auto
+execute:
+  echo: true
+  message: true
+  output: true
+  warning: true
+---
+
+```{r}
+#| include: false
+#| cache: false
+source("support.R")
+unlink("workdir/part3", recursive = TRUE)
+unlink("workdir/part3-upstream", recursive = TRUE)
+if (!file.exists("inputs/part3/cases/all.rds")) {
+  sys.source("inputs/part3/prep.R", new.env())
+}
+```
+
+## Working with other people
+
+* Where do you store your code?
+* Where do you store your data?
+* Where do you store your outputs?
+* How will things change over time?
+* Is it sensitive?
+
+## The setup
+
+Here we ignore the git side for now and focus on sharing outputs
+
+```{r}
+library(orderly2)
+orderly_init("workdir/part3")
+```
+
+```{r}
+#| include: false
+Sys.setenv(ORDERLY_ROOT = "workdir/part3")
+```
+
+[Thom Rawson](https://profiles.imperial.ac.uk/t.rawson) has kindly set up a bunch of case data for us to use.  He's put it in an orderly root that we can use as **an orderly location**.
+
+## The sausage factory
+
+We'll hide this in the final build
+
+```{r}
+#| include: true
+local({
+  path_upstream <- "workdir/part3-upstream"
+  orderly_init(path_upstream)
+  orderly_init(path_upstream)
+  orderly_new("cases", root = path_upstream)
+  fs::file_copy("inputs/part3/cases.R",
+                file.path(path_upstream, "src/cases/cases.R"),
+                overwrite = TRUE)
+  re <- "^(.+)-2020\\.csv$"
+  files <- dir("inputs/part3/cases", re)
+  regions <- sub(re, "\\1", files)
+  names(files) <- regions
+  for (region in regions) {
+    fs::file_copy(file.path("inputs/part3/cases", files[[region]]),
+                  file.path(path_upstream, "src/cases/cases.csv"),
+                  overwrite = TRUE)
+    orderly_run("cases", list(region = region, year = 2020), root = path_upstream)
+  }
+})
+```
+
+## Adding a location
+
+```{r}
+orderly_location_add_path("thom", fs::path_abs("workdir/part3-upstream"))
+```
+
+* Here we have used the `path` location type
+* We will try this with the `packit` type in the workshop
+* Locations are just another orderly root where you can find packets
+* We use `fs::path_abs()` for now, for uninteresting reasons
+
+## What has Thom been up to?
+
+```{r}
+orderly_location_pull_metadata()
+orderly_metadata_extract(location = "thom")
+```
+
+## Slightly easier to read, but harder to write
+
+```{r}
+orderly_metadata_extract(
+  location = "thom",
+  extract = c("name",
+              region = "parameters.region is string",
+              year = "parameters.year is number"))
+```
+
+## Depending on this
+
+```{r}
+orderly_new("analysis")
+```
+
+```{r}
+#| include: false
+fs::file_copy("inputs/part3/london.R",
+              "workdir/part3/src/analysis/analysis.R",
+              overwrite = TRUE)
+```
+
+And code:
+
+```{r}
+#| echo: false
+#| results: asis
+r_output(readLines("workdir/part3/src/analysis/analysis.R"))
+```
+
+## Query syntax
+
+```{r}
+orderly_search("latest", name = "cases", location = "thom")
+orderly_search("latest(parameter:region == 'east_of_england')", name = "cases",
+               location = "thom")
+orderly_search(
+  "latest(parameter:region == 'london' && parameter:year == 2020)",
+  name = "cases",
+  location = "thom")
+```
+
+You can use this elsewhere:
+
+```{r}
+orderly_metadata_extract("parameter:region == 'london'", location = "thom")
+```
+
+## The files argument
+
+```r
+    c("london.csv" = "cases.csv")
+```
+
+"Save the file `cases.csv` as `london.csv` in the working version"
+
+## Run the new report
+
+```{r, error = TRUE}
+orderly_run("analysis")
+```
+
+. . .
+
+oh no
+
+## Using packets from elsewhere
+
+Two options
+
+1. Pull the packet to make it local (`orderly_location_pull_packet`)
+2. Tell orderly which locations to use
+
+## Running with `location` {.smaller}
+
+```{r, error = TRUE}
+id <- orderly_run("analysis", location = "thom") # or allow_remote = TRUE
+```
+
+* Where dependencies are resolved is a property of `orderly_run()`, not the source of the report
+* Files are fetched as we run - only used files are copied
+
+## The result
+
+```{r}
+#| output: asis
+#| echo: false
+path_image <- file.path("workdir/part3/archive/analysis", id, "london.png")
+writeLines(sprintf("![](%s)", path_image))
+```
+
+## Include many dependencies
+
+
+
+## Thom has new data for us!
+
+```{r}
+#| include: false
+fs::file_copy("inputs/part3/cases/london-2021.csv",
+              file.path("workdir/part3-upstream", "src/cases/cases.csv"),
+              overwrite = TRUE)
+orderly_run("cases", list(region = "london", year = 2021),
+            root = "workdir/part3-upstream")
+```
+
+```{r}
+orderly_location_pull_metadata()
+```
+
+```{r}
+orderly_metadata_extract(
+  location = "thom",
+  extract = c("name",
+              region = "parameters.region is string",
+              year = "parameters.year is number"))
+```
+
+## Run our analysis with this data
+
+This time we try pulling
+
+```{r}
+orderly_location_pull_packet("latest", name = "cases", location = "thom")
+id <- orderly_run("analysis")
+```

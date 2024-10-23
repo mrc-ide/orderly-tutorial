@@ -1,0 +1,71 @@
+---
+title: "Orderly Tutorial"
+author: "MRC Centre for Global Infectious Disease Analysis"
+format:
+  revealjs:
+    preview-links: auto
+    footer: "[mrc-ide/orderly-tutorial](https://mrc-ide.github.io/orderly-tutorial)"
+execute:
+  echo: true
+  message: true
+  output: true
+  warning: true
+---
+
+```{r}
+#| include: false
+#| cache: false
+source("support.R")
+```
+
+## What is orderly?
+
+::: {.incremental}
+- A reproducible reporting framework
+- A way of keeping track of versions of data
+- A way of collaborating with other people
+- A way of thinking about analysis
+:::
+
+## Original aims:
+
+> “With orderly we have two main hopes:
+>
+> - analysts can write code that will straightforwardly run on someone else’s machine (or a remote machine)
+> - when an analysis that is run several times starts behaving differently it will be easy to see when the outputs started changing, and what inputs started changing at the same time”
+
+(~ 2018)
+
+::: {.notes}
+orderly requires a few conventions around organisation of a project, and after that tries to keep out of your way. However, these requirements are designed to make collaborative development with git easier by minimising conflicts and making backup easier by using an append-only storage system.
+:::
+
+## But what is it? {.smaller}
+
+* A [package](https://mrc-ide.github.io/orderly2) designed to make analysis more reproducible
+* A way of structuring your analysis so to make it easy to understand, run and reuse
+* A set of tools that make it easy to:
+  - track all **inputs** into an analysis (packages, code, and data resources)
+  - store multiple **versions** of an analysis where it is repeated
+  - track **outputs** of an analysis
+  - create analyses that **depend** on the outputs of previous analyses
+
+## Who uses it?
+
+- Developed since May 2017 for the [Vaccine Impact Modelling Consortium](https://www.vaccineimpact.org/)
+- Used in the 2018-2020 DRC Ebola responses
+- Used in the COVID-19 response, especially within the "real time modelling" group
+- Used within research groups (HIV, Malaria, possibly others?)
+
+## Historical notes {.smaller}
+
+* [`orderly`](https://vimc.github.io/orderly) (version 1)
+  - Created for [Vaccine Impact Modelling Consortium](https://www.vaccineimpact.org/) and strongly focussed on **reproducible research**
+  - Used [YAML](https://en.wikipedia.org/wiki/YAML) everywhere
+  - Supported simple ways of working for a small centralised team
+* [`orderly2`](https://mrc-ide.github.io/orderly2) (soon to be `orderly` 2.0.0)
+  - A complete rewrite taking the best ideas from version 1 and dropping many less useful bits
+  - Easier to program against
+  - No more YAML
+  - Focusses on **distributed collaborative analysis**
+  - Also available as a [python package](https://pypi.org/project/pyorderly/)!

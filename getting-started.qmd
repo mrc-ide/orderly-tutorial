@@ -1,0 +1,194 @@
+---
+title: "Orderly Beginnings"
+format:
+  revealjs:
+    preview-links: auto
+execute:
+  echo: true
+  message: true
+  output: true
+  warning: true
+---
+
+## Install `orderly2`
+
+```{r}
+#| include: false
+#| cache: false
+source("support.R")
+unlink("workdir/part1", recursive = TRUE)
+```
+
+From the mrc-ide [r-universe](https://mrc-ide.r-universe.dev) (recommended)
+
+```r
+install.packages(
+  "orderly2",
+  repos = c("https://mrc-ide.r-universe.dev",
+            "https://cloud.r-project.org"))
+```
+
+From GitHub using `remotes`:
+
+```r
+remotes::install_github("mrc-ide/orderly2")
+```
+
+From PyPi (for Python)
+
+```r
+pip install pyorderly
+```
+
+## My first orderly report / task
+
+. . .
+
+There is a discussion to have here about naming.  We might have this in a break...
+
+## The setup
+
+First, load the package and create a new empty orderly root.
+
+```{r}
+library(orderly2)
+orderly_init("workdir/part1")
+```
+
+(for the rest of this section, we have `setwd()` into this directory; you should create an RStudio "Project" here.)
+
+```{r}
+#| include: false
+Sys.setenv(ORDERLY_ROOT = "workdir/part1")
+```
+
+. . .
+
+## What's in the box?
+
+```{r}
+fs::dir_tree("workdir/part1")
+```
+
+. . .
+
+Really:
+
+
+```{r}
+fs::dir_tree("workdir/part1", all = TRUE)
+```
+
+But leave everything in `.outpack/` alone, just like `.git/`
+
+## Create an empty report
+
+```{r}
+orderly_new("example")
+```
+
+. . .
+
+Our contents now:
+
+```{r}
+fs::dir_tree("workdir/part1")
+```
+
+The name `example.R` is important; this always has the form `src/<name>/name.R`
+
+## Hello orderly world
+
+```{r}
+#| include: false
+fs::file_copy("inputs/part1/hello.R",
+              "workdir/part1/src/example/example.R",
+overwrite = TRUE)
+```
+
+We have edited `src/example/example.R` to contain:
+
+```{r}
+#| echo: false
+#| results: asis
+r_output(readLines("workdir/part1/src/example/example.R"))
+```
+
+Now we run
+
+```{r}
+id <- orderly_run("example")
+```
+
+## Files created {.smaller}
+
+```{r}
+fs::dir_tree("workdir/part1")
+```
+
+* Directory named after the id (in `archive/example`)
+* We have copied `example.R` into the directory
+* Output sits next to inputs
+* Metadata is stored in a hidden location
+
+Contents of `hello.csv`:
+
+```{r}
+read.csv(file.path("workdir/part1/archive/example", id, "hello.csv"))
+```
+
+## Every packet has a unique id {.smaller}
+
+```{r}
+id
+```
+
+and a bunch of metadata:
+
+```{r}
+orderly_metadata(id)
+```
+
+## What is a hash?
+
+A one-way transformation from data to a fairly short string
+
+```{r}
+orderly_hash_data("hello", "sha256")
+```
+
+. . .
+
+Very small changes to the string give large changes to the hash
+
+```{r}
+orderly_hash_data("hel1o", "sha256")
+```
+
+. . .
+
+This means we can compare hashes and be confident we are looking at the same file (`git` does a lot of this)
+
+## Run it again, Sam {.smaller}
+
+```{r}
+orderly_run("example")
+```
+
+* We have a new id with the new copy
+
+## A copy saved every time we run  {.smaller}
+
+Stop naming files `data_final-rgf (2).csv`, please
+
+```{r}
+fs::dir_tree("workdir/part1")
+```
+
+## A high-level overview of of packets:
+
+```{r}
+orderly_metadata_extract()
+```
+
+(more on this later).

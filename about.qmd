@@ -3,3 +3,26 @@ title: "About"
 ---
 
 This is a tutorial site for orderly; it uses [`orderly2`](https://mrc-ide.githubio/orderly2), which should become version 2.0.0 of orderly on CRAN early 2025.
+
+```{r}
+#| include: false
+pkgs <- c("orderly2", "cli", "fs", "gert", "httr2", "jsonlite", "openssl",
+          "rlang", "withr", "yaml", "jsonvalidate")
+for (p in pkgs) {
+  loadNamespace(p)
+}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Built using `orderly2` version `r packageVersion("orderly2")`
+
+Rendered on `r Sys.time()` using quarto `r quarto::quarto_version()`
+
+Full system information:
+
+```{r}
+sessioninfo::session_info()
+```

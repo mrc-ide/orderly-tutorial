@@ -25,3 +25,8 @@ which will open the site in a browser.  Then edit the `.qmd` pages; changes will
 The site will build when pushed to GitHub, so failures will show on a PR.  It will push to `gh-pages` automatically when merged.
 
 Documentation for quarto is [here](https://quarto.org/docs/guide/) and for revealjs presentations specifically [here](https://quarto.org/docs/presentations/revealjs/)
+
+Links between parts of the site:
+
+* From a *non-slide* `.qmd` you can use `whatever.qmd` as a target and it will work fine
+* From the slides this won't work, and I can't find a good reason why or discussion of a workaround. Include a manual link to the final rendered version.
