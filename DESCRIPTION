@@ -6,8 +6,11 @@ Authors@R: c(person("Rich", "FitzJohn", role = c("aut", "cre"),
              person("Imperial College of Science, Technology and Medicine",
                     role = "cph"))
 Imports:
+    dplyr,
     fs,
     gert,
+    ggplot2,
+    janitor,
     quarto,
     orderly2,
     readxl,
