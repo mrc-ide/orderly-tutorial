@@ -9,6 +9,10 @@ author: "MRC Centre for Global Infectious Disease Analysis"
 source("support.R")
 ```
 
+## The reproducibility rant
+
+[Slide Deck](https://docs.google.com/presentation/d/1Hj82bIQOLx78lOcPP_SwCMsw3nakwvubjlbCAS6OR_A/present?usp=sharing){preview-link="false"}
+
 ## What is orderly?
 
 ::: {.incremental}

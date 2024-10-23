@@ -45,12 +45,8 @@ Sys.setenv(ORDERLY_ROOT = "workdir/part3")
 
 [Thom Rawson](https://profiles.imperial.ac.uk/t.rawson) has kindly set up a bunch of case data for us to use.  He's put it in an orderly root that we can use as **an orderly location**.
 
-## The sausage factory
-
-We'll hide this in the final build
-
 ```{r}
-#| include: true
+#| include: false
 local({
   path_upstream <- "workdir/part3-upstream"
   orderly_init(path_upstream)
@@ -75,13 +71,17 @@ local({
 ## Adding a location
 
 ```{r}
+#| include: false
 orderly_location_add_path("thom", fs::path_abs("workdir/part3-upstream"))
 ```
 
-* Here we have used the `path` location type
-* We will try this with the `packit` type in the workshop
+```r
+orderly_location_add_packit("thom", "https://packit.dide.ic.ac.uk/training")
+```
+
+* Here we have used the `packit` location type; you must be in the [`mrc-ide` GitHub organisation](https://github.com/mrc-ide) to use this
 * Locations are just another orderly root where you can find packets
-* We use `fs::path_abs()` for now, for uninteresting reasons
+* We can arrange a "path" based location on the network drive if this does not work!
 
 ## What has Thom been up to?
 
@@ -89,6 +89,8 @@ orderly_location_add_path("thom", fs::path_abs("workdir/part3-upstream"))
 orderly_location_pull_metadata()
 orderly_metadata_extract(location = "thom")
 ```
+
+Or navigate to <https://packit.dide.ic.ac.uk/training/cases>
 
 ## Slightly easier to read, but harder to write
 
