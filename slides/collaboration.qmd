@@ -182,11 +182,61 @@ path_image <- file.path("../workdir/part3/archive/analysis", id, "london.png")
 writeLines(sprintf("![](%s)", path_image))
 ```
 
-## Include many dependencies
+## Include many dependencies {.smaller}
 
+What if we wanted to pull in all regions?
 
+```{r}
+orderly_new("analysis-all")
+```
 
-## Thom has new data for us!
+```{r}
+#| include: false
+fs::file_copy("inputs/part3/all.R",
+              "workdir/part3/src/analysis-all/analysis-all.R",
+              overwrite = TRUE)
+```
+
+with code:
+
+```{r}
+#| echo: false
+#| results: asis
+r_output(readLines("workdir/part3/src/analysis-all/analysis-all.R"))
+```
+
+## More new bits {.smaller}
+
+Loop over dependencies:
+
+```r
+for (r in regions) {
+  orderly_dependency("cases",
+                     'latest(parameter:region == environment:r)',
+                     c("cases/${r}.csv" = "cases.csv"))
+}
+```
+
+* `parameter:region == environment:r` - the packet where the parameter `region` matches `r` from our running environment
+* `"cases/${r}.csv"` - string interpolation on exit
+
+Other features are available, e.g.
+
+* `parameter:region == this:nhs_region` - match packet with parameter `region` that matches **our** parmater `nhs_region`
+
+## Run this {.smaller}
+
+```{r}
+id <- orderly_run("analysis-all", allow_remote = TRUE)
+```
+
+## Metadata {.smaller}
+
+```{r}
+orderly_metadata(id)$depends
+```
+
+## Thom has new data for us! {.smaller}
 
 ```{r}
 #| include: false
@@ -201,6 +251,10 @@ orderly_run("cases", list(region = "london", year = 2021),
 orderly_location_pull_metadata()
 ```
 
+(How did we know? You still have to communicate)
+
+. . .
+
 ```{r}
 orderly_metadata_extract(
   location = "thom",
@@ -209,12 +263,17 @@ orderly_metadata_extract(
               year = "parameters.year is number"))
 ```
 
-## Run our analysis with this data
+## Run our analysis with this data {.smaller}
 
-This time we try pulling
+This time we pull the packet first, which makes it "local"
 
 ```{r}
 orderly_location_pull_packet("latest", name = "cases", location = "thom")
+```
+
+Then run, and we'll pick it up:
+
+```{r}
 id <- orderly_run("analysis")
 ```
 

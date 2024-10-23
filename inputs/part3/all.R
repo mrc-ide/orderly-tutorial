@@ -7,7 +7,7 @@ orderly_artefact(files = sprintf("%s.png", regions),
 fs::dir_create("cases")
 for (r in regions) {
   orderly_dependency("cases",
-                     'latest(parameter:region == env:r)',
+                     'latest(parameter:region == environment:r)',
                      c("cases/${r}.csv" = "cases.csv"))
 }
 
