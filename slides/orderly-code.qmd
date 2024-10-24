@@ -61,7 +61,7 @@ fs::file_copy("inputs/part2/incoming-1.R",
               "workdir/part2/src/incoming/incoming.R", overwrite = TRUE)
 ```
 
-I've copied some data in as `data.xlsx` into `src/incoming`.
+I've copied some [data in as `data.xlsx`](https://github.com/mrc-ide/orderly-tutorial/raw/refs/heads/main/inputs/part2/data.xlsx) into `src/incoming`.
 
 ```{r}
 fs::dir_tree("workdir/part2")
@@ -284,7 +284,7 @@ fs::file_copy("inputs/part2/wuenic.xlsx", "workdir/part2/src/wuenic")
 fs::file_copy("inputs/part2/wuenic.R", "workdir/part2/src/wuenic", overwrite = TRUE)
 ```
 
-A real analysis courtesty of [Katy Gaythorpe](https://profiles.imperial.ac.uk/k.gaythorpe)
+A real analysis courtesty of [Katy Gaythorpe](https://profiles.imperial.ac.uk/k.gaythorpe), [using `wuenic.xlsx`](https://github.com/mrc-ide/orderly-tutorial/raw/refs/heads/main/inputs/part2/wuenic.xlsx)
 
 ```{r}
 #| echo: false
@@ -315,10 +315,16 @@ path_image <- file.path("../workdir/part2/archive/wuenic", id,
 writeLines(sprintf("![](%s)", path_image))
 ```
 
+## Documentation
+
+[The orderly reference](https://mrc-ide.github.io/orderly2/reference/index.html#from-within-a-running-report){preview-link="true"}
+
 ## Remaining questions
 
 * Where do we put our starting data?
 * How do we use Katy's processed data `wuenic.rds`?
+* What about custom packages?
+* What about custom reusable code snippets, data and metadata?
 
 ## Next steps
 

@@ -16,25 +16,6 @@ execute:
 source("support.R")
 ```
 
-## Documentation
-
-[The orderly reference](https://mrc-ide.github.io/orderly2/reference/index.html#from-within-a-running-report){preview-link="true"}
-
-# Details for writing reports/tasks
-
-* Shared resources
-* Resources
-* Loops over dependencies
-* Metadata
-
-# What is saved?
-
-* Information about files you consumed, and produced
-
-# Ways of collaborating
-
-# Assorted issues
-
 ## Misc
 
 * How to get data into orderly in the first place
@@ -44,7 +25,7 @@ source("support.R")
   - databases
 * Coping with failure
 * Running knitr/rmarkdown
-* Getting files out of orderly
+* Getting files out of orderly ([`orderly_copy_files`](https://mrc-ide.github.io/orderly2/reference/orderly_copy_files.html){preview-link="true"})
 
 ## The right number of packets
 
@@ -65,6 +46,7 @@ source("support.R")
 * Save some inputs?
 * Don't save secrets
 * Don't save locations
+* Git repositories might (or might not) corespond to orderly archives
 
 ## Next steps
 
