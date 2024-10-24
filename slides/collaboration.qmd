@@ -86,7 +86,7 @@ orderly_location_add_packit("thom", "https://packit.dide.ic.ac.uk/training")
 ## What has Thom been up to?
 
 ```{r}
-orderly_location_pull_metadata()
+orderly_location_fetch_metadata()
 orderly_metadata_extract(location = "thom")
 ```
 
@@ -163,7 +163,7 @@ oh no
 
 Two options
 
-1. Pull the packet to make it local (`orderly_location_pull_packet`)
+1. Pull the packet to make it local (`orderly_location_pull`)
 2. Tell orderly which locations to use
 
 ## Running with `location` {.smaller}
@@ -250,7 +250,7 @@ orderly_run("cases", list(region = "london", year = 2021),
 ```
 
 ```{r}
-orderly_location_pull_metadata()
+orderly_location_fetch_metadata()
 ```
 
 (How did we know? You still have to communicate)
@@ -265,12 +265,43 @@ orderly_metadata_extract(
               year = "parameters.year is number"))
 ```
 
+## What has changed? {.smaller}
+
+**THIS IS EXPERIMENTAL**
+
+Our two packets:
+
+```{r}
+ids <- orderly_search("parameter:region == 'london'", name = "cases",
+                      location = "thom")
+ids
+```
+
+Compare them
+
+```{r}
+res <- orderly_compare_packets(ids[[2]], ids[[1]], location = "thom")
+res
+```
+
+## Deeper comparison {.smaller}
+
+```{r}
+orderly_comparison_explain(res)
+```
+
+## Deeper comparison {.smaller}
+
+```{r}
+orderly_comparison_explain(res, verbose = TRUE)
+```
+
 ## Run our analysis with this data {.smaller}
 
 This time we pull the packet first, which makes it "local"
 
 ```{r}
-orderly_location_pull_packet("latest", name = "cases", location = "thom")
+orderly_location_pull("latest", name = "cases", location = "thom")
 ```
 
 Then run, and we'll pick it up:

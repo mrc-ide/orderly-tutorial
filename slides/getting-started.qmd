@@ -40,6 +40,12 @@ From PyPi (for Python)
 pip install pyorderly
 ```
 
+## Check your version
+
+```{r}
+packageVersion("orderly2")
+```
+
 ## My first orderly report / task
 
 . . .

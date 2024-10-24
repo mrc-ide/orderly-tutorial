@@ -13,42 +13,10 @@ source("support.R")
 
 [Slide Deck](https://docs.google.com/presentation/d/1Hj82bIQOLx78lOcPP_SwCMsw3nakwvubjlbCAS6OR_A/present?usp=sharing){preview-link="false"}
 
-## What is orderly?
-
-::: {.incremental}
-- A reproducible reporting framework
-- A way of keeping track of versions of data
-- A way of collaborating with other people
-- A way of thinking about analysis
-:::
-
-## Original aims:
-
-> “With orderly we have two main hopes:
->
-> - analysts can write code that will straightforwardly run on someone else’s machine (or a remote machine)
-> - when an analysis that is run several times starts behaving differently it will be easy to see when the outputs started changing, and what inputs started changing at the same time”
-
-(~ 2018)
-
-::: {.notes}
-orderly requires a few conventions around organisation of a project, and after that tries to keep out of your way. However, these requirements are designed to make collaborative development with git easier by minimising conflicts and making backup easier by using an append-only storage system.
-:::
-
-## But what is it? {.smaller}
-
-* A [package](https://mrc-ide.github.io/orderly2) designed to make analysis more reproducible
-* A way of structuring your analysis so to make it easy to understand, run and reuse
-* A set of tools that make it easy to:
-  - track all **inputs** into an analysis (packages, code, and data resources)
-  - store multiple **versions** of an analysis where it is repeated
-  - track **outputs** of an analysis
-  - create analyses that **depend** on the outputs of previous analyses
-
 ## Who uses it?
 
 - Developed since May 2017 for the [Vaccine Impact Modelling Consortium](https://www.vaccineimpact.org/)
-- Used in the 2018-2020 DRC Ebola responses
+- Adopted by the MRC Centre and used in the 2018-2020 DRC Ebola responses
 - Used in the COVID-19 response, especially within the "real time modelling" group
 - Used within research groups (HIV, Malaria, possibly others?)
 
@@ -64,6 +32,15 @@ orderly requires a few conventions around organisation of a project, and after t
   - No more YAML
   - Focusses on **distributed collaborative analysis**
   - Also available as a [python package](https://pypi.org/project/pyorderly/)!
+
+## Situation report
+
+* Open RStudio - is it installed?
+* Check your R version - does it start with 4.4?
+* Do you have git installed?
+* Does your RStudio have a git button?
+* Go to <https://github.com> - are you logged in?
+* Go to <https://github.com/settings/organizations> - are you in `mrc-ide`?
 
 ## Next steps
 

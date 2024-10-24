@@ -18,7 +18,8 @@ regions <- unique(d$Region)
 ## Split versions for us to easily use as inputs to reports:
 for (year in 2020:2022) {
   for (region in regions) {
-    dsub <- d[d$Region == region & d$date_begin <= as.Date("2020-12-31"), ]
+    date <- as.Date(sprintf("%d-12-31", year))
+    dsub <- d[d$Region == region & d$date_begin <= date, ]
     rownames(dsub) <- NULL
     write.csv(dsub,
               sprintf("inputs/part3/cases/%s-%d.csv", region, year),
