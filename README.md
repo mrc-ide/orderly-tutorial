@@ -6,7 +6,7 @@ A site for [orderly](https://mrc-ide.github.io/orderly) training; you may prefer
 
 You will need to install quarto, [start here](https://quarto.org/docs/get-started/) to do so.
 
-You will also need a very recent versions of `orderly`, the easiest way is probably
+You will also need a very recent version of `orderly`, the easiest way is probably
 
 ```
 install.packages(
