@@ -31,7 +31,7 @@ But...
 ## A clean beginning
 
 ```{r}
-library(orderly2)
+library(orderly)
 orderly_init("workdir/part2")
 ```
 
@@ -317,7 +317,7 @@ writeLines(sprintf("![](%s)", path_image))
 
 ## Documentation
 
-[The orderly reference](https://mrc-ide.github.io/orderly2/reference/index.html#from-within-a-running-report){preview-link="true"}
+[The orderly reference](https://mrc-ide.github.io/orderly/reference/index.html#from-within-a-running-report){preview-link="true"}
 
 ## Remaining questions
 
