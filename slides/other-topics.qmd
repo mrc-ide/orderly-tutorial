@@ -25,7 +25,7 @@ source("support.R")
   - databases
 * Coping with failure
 * Running knitr/rmarkdown
-* Getting files out of orderly ([`orderly_copy_files`](https://mrc-ide.github.io/orderly2/reference/orderly_copy_files.html){preview-link="true"})
+* Getting files out of orderly ([`orderly_copy_files`](https://mrc-ide.github.io/orderly/reference/orderly_copy_files.html){preview-link="true"})
 
 ## The right number of packets
 

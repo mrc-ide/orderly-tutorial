@@ -12,9 +12,9 @@ Imports:
     ggplot2,
     janitor,
     quarto,
-    orderly2,
+    orderly,
     readxl,
     rmarkdown
 Remotes:
-    mrc-ide/orderly2
+    mrc-ide/orderly
 Encoding: UTF-8

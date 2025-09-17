@@ -2,11 +2,11 @@
 title: "About"
 ---
 
-This is a tutorial site for orderly; it uses [`orderly2`](https://mrc-ide.github.io/orderly2), which should become version 2.0.0 of orderly on CRAN early 2025.
+This is a tutorial site for orderly.
 
 ```{r}
 #| include: false
-packages <- c("orderly2", "cli", "fs", "gert", "httr2", "jsonlite", "openssl",
+packages <- c("orderly", "cli", "fs", "gert", "httr2", "jsonlite", "openssl",
               "rlang", "withr", "yaml")
 for (p in packages) {
   loadNamespace(p)
@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-Built using `orderly2` version `r packageVersion("orderly2")`
+Built using `orderly` version `r packageVersion("orderly")`
 
 Rendered on `r Sys.time()` using quarto `r quarto::quarto_version()`
 

@@ -22,11 +22,11 @@ source("support.R")
 
 ## Historical notes {.smaller}
 
-* [`orderly`](https://vimc.github.io/orderly) (version 1)
+* [`orderly1`](https://vimc.github.io/orderly1) (originally `orderly` version 1)
   - Created for [Vaccine Impact Modelling Consortium](https://www.vaccineimpact.org/) and strongly focussed on **reproducible research**
   - Used [YAML](https://en.wikipedia.org/wiki/YAML) everywhere
   - Supported simple ways of working for a small centralised team
-* [`orderly2`](https://mrc-ide.github.io/orderly2) (soon to be `orderly` 2.0.0)
+* [`orderly`](https://mrc-ide.github.io/orderly) version 2 (previously `orderly2`)
   - A complete rewrite taking the best ideas from version 1 and dropping many less useful bits
   - Easier to program against
   - No more YAML

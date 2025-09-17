@@ -34,7 +34,7 @@ if (!file.exists("inputs/part3/cases/all.rds")) {
 Here we ignore the git side for now and focus on sharing outputs
 
 ```{r}
-library(orderly2)
+library(orderly)
 orderly_init("workdir/part3")
 ```
 

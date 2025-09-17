@@ -10,7 +10,7 @@ execute:
   warning: true
 ---
 
-## Install `orderly2`
+## Install `orderly`
 
 ```{r}
 #| include: false
@@ -23,15 +23,14 @@ From the mrc-ide [r-universe](https://mrc-ide.r-universe.dev) (recommended)
 
 ```r
 install.packages(
-  "orderly2",
-  repos = c("https://mrc-ide.r-universe.dev",
-            "https://cloud.r-project.org"))
+  "orderly",
+  repos = c("https://mrc-ide.r-universe.dev", "https://cloud.r-project.org"))
 ```
 
 From GitHub using `remotes`:
 
 ```r
-remotes::install_github("mrc-ide/orderly2")
+remotes::install_github("mrc-ide/orderly")
 ```
 
 From PyPi (for Python)
@@ -43,7 +42,7 @@ pip install pyorderly
 ## Check your version
 
 ```{r}
-packageVersion("orderly2")
+packageVersion("orderly")
 ```
 
 ## My first orderly report / task
@@ -57,7 +56,7 @@ There is a discussion to have here about naming.  We might have this in a break.
 First, load the package and create a new empty orderly root.
 
 ```{r}
-library(orderly2)
+library(orderly)
 orderly_init("workdir/part1")
 ```
 

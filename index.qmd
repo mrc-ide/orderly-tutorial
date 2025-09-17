@@ -2,7 +2,7 @@
 title: "orderly tutorial"
 ---
 
-This is a site for the [orderly (orderly2)](https://mrc-ide.github.io/orderly2) tutorial.  There are a series of slide decks designed to run one after another:
+This is a site for the [orderly (orderly)](https://mrc-ide.github.io/orderly) tutorial.  There are a series of slide decks designed to run one after another:
 
 1. [Introduction](slides/intro.qmd)
 1. [Getting started](slides/getting-started.qmd)

@@ -1,4 +1,4 @@
-library(orderly2)
+library(orderly)
 root <- "workdir/part3-upstream"
 ids <- orderly_search("parameter:year == 2020", root = root)
 
