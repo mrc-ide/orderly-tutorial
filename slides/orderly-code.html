@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.25">
+
+  <title>orderly, the tutorial – Orderly Code</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-534cd8e3a96973385dffff3f4709048d.css">
+  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Orderly Code</h1>
+
+<div class="quarto-title-authors">
+</div>
+
+</section>
+<section id="what-can-i-do" class="slide level2">
+<h2>What can I do?</h2>
+<ul>
+<li>orderly code is any code you can use from R</li>
+<li>Use (almost) any package, any sort of file</li>
+</ul>
+<p>But…</p>
+<ul>
+<li>The directory above your file <strong>does not exist</strong></li>
+<li>Don’t use absolute paths or <code>../</code> path fragments</li>
+<li>You can add metadata to help future you/others</li>
+</ul>
+</section>
+<section id="a-clean-beginning" class="slide level2">
+<h2>A clean beginning</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(orderly)</span>
+<span id="cb1-2"><a></a><span class="fu">orderly_init</span>(<span class="st">"workdir/part2"</span>)</span>
+<span id="cb1-3"><a></a><span class="do">## ✔ Created orderly root at '/home/runner/work/orderly-tutorial/orderly-tutorial/workdir/part2'</span></span>
+<span id="cb1-4"><a></a><span class="do">## Warning: Can't check if files are correctly gitignored</span></span>
+<span id="cb1-5"><a></a><span class="do">## ℹ Your outpack repo is in a subdirectory ''workdir/part2'' of your git repo</span></span>
+<span id="cb1-6"><a></a><span class="do">## ℹ To disable this check, set the option 'orderly_git_error_ignore' to TRUE by</span></span>
+<span id="cb1-7"><a></a><span class="do">##   running `options(orderly_git_error_ignore = TRUE)`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Suppose we’re working on a data analysis pipeline, starting with “incoming data”:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">orderly_new</span>(<span class="st">"incoming"</span>)</span>
+<span id="cb2-2"><a></a><span class="do">## Warning: Can't check if files are correctly gitignored</span></span>
+<span id="cb2-3"><a></a><span class="do">## ℹ Your outpack repo is in a subdirectory ''workdir/part2'' of your git repo</span></span>
+<span id="cb2-4"><a></a><span class="do">## ℹ To disable this check, set the option 'orderly_git_error_ignore' to TRUE by</span></span>
+<span id="cb2-5"><a></a><span class="do">##   running `options(orderly_git_error_ignore = TRUE)`</span></span>
+<span id="cb2-6"><a></a><span class="do">## ✔ Created 'src/incoming/incoming.R'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Our setup:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>fs<span class="sc">::</span><span class="fu">dir_tree</span>(<span class="st">"workdir/part2"</span>)</span>
+<span id="cb3-2"><a></a><span class="do">## workdir/part2</span></span>
+<span id="cb3-3"><a></a><span class="do">## ├── orderly_config.json</span></span>
+<span id="cb3-4"><a></a><span class="do">## └── src</span></span>
+<span id="cb3-5"><a></a><span class="do">##     └── incoming</span></span>
+<span id="cb3-6"><a></a><span class="do">##         └── incoming.R</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="incoming-data" class="slide level2 smaller">
+<h2>Incoming data</h2>
+<p>I’ve copied some <a href="https://github.com/mrc-ide/orderly-tutorial/raw/refs/heads/main/inputs/part2/data.xlsx">data in as <code>data.xlsx</code></a> into <code>src/incoming</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>fs<span class="sc">::</span><span class="fu">dir_tree</span>(<span class="st">"workdir/part2"</span>)</span>
+<span id="cb4-2"><a></a><span class="do">## workdir/part2</span></span>
+<span id="cb4-3"><a></a><span class="do">## ├── orderly_config.json</span></span>
+<span id="cb4-4"><a></a><span class="do">## └── src</span></span>
+<span id="cb4-5"><a></a><span class="do">##     └── incoming</span></span>
+<span id="cb4-6"><a></a><span class="do">##         ├── data.xlsx</span></span>
+<span id="cb4-7"><a></a><span class="do">##         └── incoming.R</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ul>
+<li>Modify <code>incoming.R</code> to tidy that up for consumption using your favourite packages.</li>
+<li>Set your working directory to <code>src/incoming</code> and just edit things as usual</li>
+<li>Which sheet contains the data?</li>
+<li>Where is the data in that sheet?</li>
+<li>Do you like those column names?</li>
+<li>How about that date format?</li>
+</ul>
+</section>
+<section id="incoming-data-cleaned" class="slide level2">
+<h2>Incoming data, cleaned</h2>
+<p>My attempt at cleaning:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>d <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="st">"data.xlsx"</span>, <span class="at">sheet =</span> <span class="dv">2</span>, <span class="at">skip =</span> <span class="dv">2</span>)</span>
+<span id="cb5-2"><a></a><span class="fu">names</span>(d) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">" "</span>, <span class="st">"_"</span>, <span class="fu">tolower</span>(<span class="fu">names</span>(d)))</span>
+<span id="cb5-3"><a></a>d<span class="sc">$</span>date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(d<span class="sc">$</span>date)</span>
+<span id="cb5-4"><a></a><span class="fu">write.csv</span>(d, <span class="st">"data.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>Read in the data</li>
+<li>Clean up the names (could have used <code>janitor</code>)</li>
+<li>Convert date format</li>
+<li>Write as <code>csv</code></li>
+</ul>
+</section>
+<section id="incoming-data-running-things" class="slide level2 smaller">
+<h2>Incoming data, running things</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>id <span class="ot">&lt;-</span> <span class="fu">orderly_run</span>(<span class="st">"incoming"</span>)</span>
+<span id="cb6-2"><a></a><span class="do">## Warning: Can't check if files are correctly gitignored</span></span>
+<span id="cb6-3"><a></a><span class="do">## ℹ Your outpack repo is in a subdirectory ''workdir/part2'' of your git repo</span></span>
+<span id="cb6-4"><a></a><span class="do">## ℹ To disable this check, set the option 'orderly_git_error_ignore' to TRUE by</span></span>
+<span id="cb6-5"><a></a><span class="do">##   running `options(orderly_git_error_ignore = TRUE)`</span></span>
+<span id="cb6-6"><a></a><span class="do">## ℹ Starting packet 'incoming' `20251007-071623-1226e67d` at 2025-10-07 07:16:23.079066</span></span>
+<span id="cb6-7"><a></a><span class="do">## &gt; d &lt;- readxl::read_excel("data.xlsx", sheet = 2, skip = 2)</span></span>
+<span id="cb6-8"><a></a><span class="do">## &gt; names(d) &lt;- gsub(" ", "_", tolower(names(d)))</span></span>
+<span id="cb6-9"><a></a><span class="do">## &gt; d$date &lt;- as.Date(d$date)</span></span>
+<span id="cb6-10"><a></a><span class="do">## &gt; write.csv(d, "data.csv", row.names = FALSE)</span></span>
+<span id="cb6-11"><a></a><span class="do">## ✔ Finished running 'incoming.R'</span></span>
+<span id="cb6-12"><a></a><span class="do">## ℹ Finished 20251007-071623-1226e67d at 2025-10-07 07:16:23.149212 (0.07014561 secs)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Our generated metadata (this output box scrolls)</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">orderly_metadata</span>(id)</span>
+<span id="cb7-2"><a></a><span class="do">## Warning: Can't check if files are correctly gitignored</span></span>
+<span id="cb7-3"><a></a><span class="do">## ℹ Your outpack repo is in a subdirectory ''workdir/part2'' of your git repo</span></span>
+<span id="cb7-4"><a></a><span class="do">## ℹ To disable this check, set the option 'orderly_git_error_ignore' to TRUE by</span></span>
+<span id="cb7-5"><a></a><span class="do">##   running `options(orderly_git_error_ignore = TRUE)`</span></span>
+<span id="cb7-6"><a></a><span class="do">## $schema_version</span></span>
+<span id="cb7-7"><a></a><span class="do">## [1] "0.1.1"</span></span>
+<span id="cb7-8"><a></a><span class="do">## </span></span>
+<span id="cb7-9"><a></a><span class="do">## $name</span></span>
+<span id="cb7-10"><a></a><span class="do">## [1] "incoming"</span></span>
+<span id="cb7-11"><a></a><span class="do">## </span></span>
+<span id="cb7-12"><a></a><span class="do">## $id</span></span>
+<span id="cb7-13"><a></a><span class="do">## [1] "20251007-071623-1226e67d"</span></span>
+<span id="cb7-14"><a></a><span class="do">## </span></span>
+<span id="cb7-15"><a></a><span class="do">## $time</span></span>
+<span id="cb7-16"><a></a><span class="do">## $time$start</span></span>
+<span id="cb7-17"><a></a><span class="do">## [1] "2025-10-07 07:16:23 UTC"</span></span>
+<span id="cb7-18"><a></a><span class="do">## </span></span>
+<span id="cb7-19"><a></a><span class="do">## $time$end</span></span>
+<span id="cb7-20"><a></a><span class="do">## [1] "2025-10-07 07:16:23 UTC"</span></span>
+<span id="cb7-21"><a></a><span class="do">## </span></span>
+<span id="cb7-22"><a></a><span class="do">## </span></span>
+<span id="cb7-23"><a></a><span class="do">## $parameters</span></span>
+<span id="cb7-24"><a></a><span class="do">## NULL</span></span>
+<span id="cb7-25"><a></a><span class="do">## </span></span>
+<span id="cb7-26"><a></a><span class="do">## $files</span></span>
+<span id="cb7-27"><a></a><span class="do">##         path  size</span></span>
+<span id="cb7-28"><a></a><span class="do">## 1   data.csv   466</span></span>
+<span id="cb7-29"><a></a><span class="do">## 2  data.xlsx 10851</span></span>
+<span id="cb7-30"><a></a><span class="do">## 3 incoming.R   174</span></span>
+<span id="cb7-31"><a></a><span class="do">##                                                                      hash</span></span>
+<span id="cb7-32"><a></a><span class="do">## 1 sha256:9117700f079b786812cc20904f4c34f5659f2986a923d2771216551cf378e86f</span></span>
+<span id="cb7-33"><a></a><span class="do">## 2 sha256:149445ecc545eb987ecc0d5255a48f21165ee1c9b6b54c84b882ce1fbda066b7</span></span>
+<span id="cb7-34"><a></a><span class="do">## 3 sha256:8ce9dc59614d62b39cd4ff8cfba08e48f993a9be6d3c29357118df386bf7688f</span></span>
+<span id="cb7-35"><a></a><span class="do">## </span></span>
+<span id="cb7-36"><a></a><span class="do">## $depends</span></span>
+<span id="cb7-37"><a></a><span class="do">## [1] packet query  files </span></span>
+<span id="cb7-38"><a></a><span class="do">## &lt;0 rows&gt; (or 0-length row.names)</span></span>
+<span id="cb7-39"><a></a><span class="do">## </span></span>
+<span id="cb7-40"><a></a><span class="do">## $git</span></span>
+<span id="cb7-41"><a></a><span class="do">## $git$sha</span></span>
+<span id="cb7-42"><a></a><span class="do">## [1] "6ddafeaae72937fa2cceb1817b8d133b64d5293c"</span></span>
+<span id="cb7-43"><a></a><span class="do">## </span></span>
+<span id="cb7-44"><a></a><span class="do">## $git$branch</span></span>
+<span id="cb7-45"><a></a><span class="do">## [1] "main"</span></span>
+<span id="cb7-46"><a></a><span class="do">## </span></span>
+<span id="cb7-47"><a></a><span class="do">## $git$url</span></span>
+<span id="cb7-48"><a></a><span class="do">## [1] "https://github.com/mrc-ide/orderly-tutorial"</span></span>
+<span id="cb7-49"><a></a><span class="do">## </span></span>
+<span id="cb7-50"><a></a><span class="do">## </span></span>
+<span id="cb7-51"><a></a><span class="do">## $custom</span></span>
+<span id="cb7-52"><a></a><span class="do">## $custom$orderly</span></span>
+<span id="cb7-53"><a></a><span class="do">## $custom$orderly$artefacts</span></span>
+<span id="cb7-54"><a></a><span class="do">## [1] description paths      </span></span>
+<span id="cb7-55"><a></a><span class="do">## &lt;0 rows&gt; (or 0-length row.names)</span></span>
+<span id="cb7-56"><a></a><span class="do">## </span></span>
+<span id="cb7-57"><a></a><span class="do">## $custom$orderly$role</span></span>
+<span id="cb7-58"><a></a><span class="do">##         path    role</span></span>
+<span id="cb7-59"><a></a><span class="do">## 1 incoming.R orderly</span></span>
+<span id="cb7-60"><a></a><span class="do">## </span></span>
+<span id="cb7-61"><a></a><span class="do">## $custom$orderly$description</span></span>
+<span id="cb7-62"><a></a><span class="do">## $custom$orderly$description$display</span></span>
+<span id="cb7-63"><a></a><span class="do">## NULL</span></span>
+<span id="cb7-64"><a></a><span class="do">## </span></span>
+<span id="cb7-65"><a></a><span class="do">## $custom$orderly$description$long</span></span>
+<span id="cb7-66"><a></a><span class="do">## NULL</span></span>
+<span id="cb7-67"><a></a><span class="do">## </span></span>
+<span id="cb7-68"><a></a><span class="do">## $custom$orderly$description$custom</span></span>
+<span id="cb7-69"><a></a><span class="do">## NULL</span></span>
+<span id="cb7-70"><a></a><span class="do">## </span></span>
+<span id="cb7-71"><a></a><span class="do">## </span></span>
+<span id="cb7-72"><a></a><span class="do">## $custom$orderly$shared</span></span>
+<span id="cb7-73"><a></a><span class="do">## [1] here  there</span></span>
+<span id="cb7-74"><a></a><span class="do">## &lt;0 rows&gt; (or 0-length row.names)</span></span>
+<span id="cb7-75"><a></a><span class="do">## </span></span>
+<span id="cb7-76"><a></a><span class="do">## $custom$orderly$session</span></span>
+<span id="cb7-77"><a></a><span class="do">## $custom$orderly$session$platform</span></span>
+<span id="cb7-78"><a></a><span class="do">## $custom$orderly$session$platform$version</span></span>
+<span id="cb7-79"><a></a><span class="do">## [1] "R version 4.5.1 (2025-06-13)"</span></span>
+<span id="cb7-80"><a></a><span class="do">## </span></span>
+<span id="cb7-81"><a></a><span class="do">## $custom$orderly$session$platform$os</span></span>
+<span id="cb7-82"><a></a><span class="do">## [1] "Ubuntu 24.04.3 LTS"</span></span>
+<span id="cb7-83"><a></a><span class="do">## </span></span>
+<span id="cb7-84"><a></a><span class="do">## $custom$orderly$session$platform$system</span></span>
+<span id="cb7-85"><a></a><span class="do">## [1] "x86_64, linux-gnu"</span></span>
+<span id="cb7-86"><a></a><span class="do">## </span></span>
+<span id="cb7-87"><a></a><span class="do">## </span></span>
+<span id="cb7-88"><a></a><span class="do">## $custom$orderly$session$packages</span></span>
+<span id="cb7-89"><a></a><span class="do">##        package version attached</span></span>
+<span id="cb7-90"><a></a><span class="do">## 1      orderly 1.99.92     TRUE</span></span>
+<span id="cb7-91"><a></a><span class="do">## 2       crayon   1.5.3    FALSE</span></span>
+<span id="cb7-92"><a></a><span class="do">## 3        vctrs   0.6.5    FALSE</span></span>
+<span id="cb7-93"><a></a><span class="do">## 4          cli   3.6.5    FALSE</span></span>
+<span id="cb7-94"><a></a><span class="do">## 5        knitr    1.50    FALSE</span></span>
+<span id="cb7-95"><a></a><span class="do">## 6        rlang   1.1.6    FALSE</span></span>
+<span id="cb7-96"><a></a><span class="do">## 7         xfun    0.53    FALSE</span></span>
+<span id="cb7-97"><a></a><span class="do">## 8     jsonlite   2.0.0    FALSE</span></span>
+<span id="cb7-98"><a></a><span class="do">## 9         glue   1.8.0    FALSE</span></span>
+<span id="cb7-99"><a></a><span class="do">## 10     openssl   2.3.4    FALSE</span></span>
+<span id="cb7-100"><a></a><span class="do">## 11     askpass   1.2.1    FALSE</span></span>
+<span id="cb7-101"><a></a><span class="do">## 12   htmltools 0.5.8.1    FALSE</span></span>
+<span id="cb7-102"><a></a><span class="do">## 13         sys   3.4.3    FALSE</span></span>
+<span id="cb7-103"><a></a><span class="do">## 14      readxl   1.4.5    FALSE</span></span>
+<span id="cb7-104"><a></a><span class="do">## 15   rmarkdown    2.30    FALSE</span></span>
+<span id="cb7-105"><a></a><span class="do">## 16  cellranger   1.1.0    FALSE</span></span>
+<span id="cb7-106"><a></a><span class="do">## 17    evaluate   1.0.5    FALSE</span></span>
+<span id="cb7-107"><a></a><span class="do">## 18      tibble   3.3.0    FALSE</span></span>
+<span id="cb7-108"><a></a><span class="do">## 19     fastmap   1.2.0    FALSE</span></span>
+<span id="cb7-109"><a></a><span class="do">## 20        yaml  2.3.10    FALSE</span></span>
+<span id="cb7-110"><a></a><span class="do">## 21   lifecycle   1.0.4    FALSE</span></span>
+<span id="cb7-111"><a></a><span class="do">## 22    compiler   4.5.1    FALSE</span></span>
+<span id="cb7-112"><a></a><span class="do">## 23          fs   1.6.6    FALSE</span></span>
+<span id="cb7-113"><a></a><span class="do">## 24   pkgconfig   2.0.3    FALSE</span></span>
+<span id="cb7-114"><a></a><span class="do">## 25      digest  0.6.37    FALSE</span></span>
+<span id="cb7-115"><a></a><span class="do">## 26        gert   2.1.5    FALSE</span></span>
+<span id="cb7-116"><a></a><span class="do">## 27          R6   2.6.1    FALSE</span></span>
+<span id="cb7-117"><a></a><span class="do">## 28      pillar  1.11.1    FALSE</span></span>
+<span id="cb7-118"><a></a><span class="do">## 29 credentials   2.0.3    FALSE</span></span>
+<span id="cb7-119"><a></a><span class="do">## 30    magrittr   2.0.4    FALSE</span></span>
+<span id="cb7-120"><a></a><span class="do">## 31       withr   3.0.2    FALSE</span></span>
+<span id="cb7-121"><a></a><span class="do">## 32       tools   4.5.1    FALSE</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="resources" class="slide level2">
+<h2>“Resources”</h2>
+<ul>
+<li>Any file that is an <strong>input</strong></li>
+<li>For example:
+<ul>
+<li>Scripts that you <code>source()</code></li>
+<li>R Markdown files for <code>knitr</code> or <code>rmarkdown</code></li>
+<li>Data files (<code>.csv</code>, <code>.xlsx</code>, etc)</li>
+<li>Plain text files (<code>README.md</code>, licence info, etc)</li>
+</ul></li>
+<li>Here, <code>data.xlsx</code> is an input</li>
+</ul>
+</section>
+<section id="telling-orderly-about-resources" class="slide level2 smaller">
+<h2>Telling orderly about resources</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">orderly_resource</span>(<span class="st">"data.xlsx"</span>)</span>
+<span id="cb8-2"><a></a>d <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="st">"data.xlsx"</span>, <span class="at">sheet =</span> <span class="dv">2</span>, <span class="at">skip =</span> <span class="dv">2</span>)</span>
+<span id="cb8-3"><a></a><span class="fu">names</span>(d) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">" "</span>, <span class="st">"_"</span>, <span class="fu">tolower</span>(<span class="fu">names</span>(d)))</span>
+<span id="cb8-4"><a></a>d<span class="sc">$</span>date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(d<span class="sc">$</span>date)</span>
+<span id="cb8-5"><a></a><span class="fu">write.csv</span>(d, <span class="st">"data.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<ul>
+<li>Tells orderly <code>data.xlsx</code> is a <strong>resource</strong></li>
+<li>Fail early if resource not found</li>
+<li>Error if resource is modified</li>
+<li>Extra metadata, advertising what files <strong>were used</strong></li>
+</ul>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>id <span class="ot">&lt;-</span> <span class="fu">orderly_run</span>(<span class="st">"incoming"</span>)</span>
+<span id="cb9-2"><a></a><span class="do">## Warning: Can't check if files are correctly gitignored</span></span>
+<span id="cb9-3"><a></a><span class="do">## ℹ Your outpack repo is in a subdirectory ''workdir/part2'' of your git repo</span></span>
+<span id="cb9-4"><a></a><span class="do">## ℹ To disable this check, set the option 'orderly_git_error_ignore' to TRUE by</span></span>
+<span id="cb9-5"><a></a><span class="do">##   running `options(orderly_git_error_ignore = TRUE)`</span></span>
+<span id="cb9-6"><a></a><span class="do">## ℹ Starting packet 'incoming' `20251007-071623-3df771be` at 2025-10-07 07:16:23.246878</span></span>
+<span id="cb9-7"><a></a><span class="do">## &gt; orderly_resource("data.xlsx")</span></span>
+<span id="cb9-8"><a></a><span class="do">## &gt; d &lt;- readxl::read_excel("data.xlsx", sheet = 2, skip = 2)</span></span>
+<span id="cb9-9"><a></a><span class="do">## &gt; names(d) &lt;- gsub(" ", "_", tolower(names(d)))</span></span>
+<span id="cb9-10"><a></a><span class="do">## &gt; d$date &lt;- as.Date(d$date)</span></span>
+<span id="cb9-11"><a></a><span class="do">## &gt; write.csv(d, "data.csv", row.names = FALSE)</span></span>
+<span id="cb9-12"><a></a><span class="do">## ✔ Finished running 'incoming.R'</span></span>
+<span id="cb9-13"><a></a><span class="do">## ℹ Finished 20251007-071623-3df771be at 2025-10-07 07:16:23.283559 (0.03668118 secs)</span></span>
+<span id="cb9-14"><a></a><span class="fu">orderly_metadata</span>(id)<span class="sc">$</span>custom<span class="sc">$</span>orderly<span class="sc">$</span>role</span>
+<span id="cb9-15"><a></a><span class="do">## Warning: Can't check if files are correctly gitignored</span></span>
+<span id="cb9-16"><a></a><span class="do">## ℹ Your outpack repo is in a subdirectory ''workdir/part2'' of your git repo</span></span>
+<span id="cb9-17"><a></a><span class="do">## ℹ To disable this check, set the option 'orderly_git_error_ignore' to TRUE by</span></span>
+<span id="cb9-18"><a></a><span class="do">##   running `options(orderly_git_error_ignore = TRUE)`</span></span>
+<span id="cb9-19"><a></a><span class="do">##         path     role</span></span>
+<span id="cb9-20"><a></a><span class="do">## 1 incoming.R  orderly</span></span>
+<span id="cb9-21"><a></a><span class="do">## 2  data.xlsx resource</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</section>
+<section id="artefacts" class="slide level2">
+<h2>“Artefacts”</h2>
+<ul>
+<li>Any file that is an <strong>output</strong></li>
+<li>For example:
+<ul>
+<li>Datasets you generate</li>
+<li>html or pdf output from <code>knitr</code> or <code>rmarkdown</code></li>
+<li>Plain text files</li>
+<li>Inputs themselves, sometimes</li>
+</ul></li>
+<li>Here, <code>data.csv</code> is an artefact</li>
+</ul>
+</section>
+<section id="telling-orderly-about-artefacts" class="slide level2 smaller">
+<h2>Telling orderly about artefacts</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">orderly_resource</span>(<span class="st">"data.xlsx"</span>)</span>
+<span id="cb10-2"><a></a><span class="fu">orderly_artefact</span>(<span class="at">files =</span> <span class="st">"data.csv"</span>, <span class="at">description =</span> <span class="st">"Cleaned data"</span>)</span>
+<span id="cb10-3"><a></a>d <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="st">"data.xlsx"</span>, <span class="at">sheet =</span> <span class="dv">2</span>, <span class="at">skip =</span> <span class="dv">2</span>)</span>
+<span id="cb10-4"><a></a><span class="fu">names</span>(d) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">" "</span>, <span class="st">"_"</span>, <span class="fu">tolower</span>(<span class="fu">names</span>(d)))</span>
+<span id="cb10-5"><a></a>d<span class="sc">$</span>date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(d<span class="sc">$</span>date)</span>
+<span id="cb10-6"><a></a><span class="fu">write.csv</span>(d, <span class="st">"data.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<ul>
+<li>Tells orderly <code>csv.xlsx</code> is an <strong>artefact</strong></li>
+<li>Fail if artefact not produced</li>
+<li>Extra metadata, advertising what files <strong>were produced</strong></li>
+</ul>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>id <span class="ot">&lt;-</span> <span class="fu">orderly_run</span>(<span class="st">"incoming"</span>)</span>
+<span id="cb11-2"><a></a><span class="do">## Warning: Can't check if files are correctly gitignored</span></span>
+<span id="cb11-3"><a></a><span class="do">## ℹ Your outpack repo is in a subdirectory ''workdir/part2'' of your git repo</span></span>
+<span id="cb11-4"><a></a><span class="do">## ℹ To disable this check, set the option 'orderly_git_error_ignore' to TRUE by</span></span>
+<span id="cb11-5"><a></a><span class="do">##   running `options(orderly_git_error_ignore = TRUE)`</span></span>
+<span id="cb11-6"><a></a><span class="do">## ℹ Starting packet 'incoming' `20251007-071623-5dae8f81` at 2025-10-07 07:16:23.370757</span></span>
+<span id="cb11-7"><a></a><span class="do">## &gt; orderly_resource("data.xlsx")</span></span>
+<span id="cb11-8"><a></a><span class="do">## &gt; orderly_artefact(files = "data.csv", description = "Cleaned data")</span></span>
+<span id="cb11-9"><a></a><span class="do">## &gt; d &lt;- readxl::read_excel("data.xlsx", sheet = 2, skip = 2)</span></span>
+<span id="cb11-10"><a></a><span class="do">## &gt; names(d) &lt;- gsub(" ", "_", tolower(names(d)))</span></span>
+<span id="cb11-11"><a></a><span class="do">## &gt; d$date &lt;- as.Date(d$date)</span></span>
+<span id="cb11-12"><a></a><span class="do">## &gt; write.csv(d, "data.csv", row.names = FALSE)</span></span>
+<span id="cb11-13"><a></a><span class="do">## ✔ Finished running 'incoming.R'</span></span>
+<span id="cb11-14"><a></a><span class="do">## ℹ Finished 20251007-071623-5dae8f81 at 2025-10-07 07:16:23.399106 (0.02834916 secs)</span></span>
+<span id="cb11-15"><a></a><span class="fu">orderly_metadata</span>(id)<span class="sc">$</span>custom<span class="sc">$</span>orderly<span class="sc">$</span>artefacts</span>
+<span id="cb11-16"><a></a><span class="do">## Warning: Can't check if files are correctly gitignored</span></span>
+<span id="cb11-17"><a></a><span class="do">## ℹ Your outpack repo is in a subdirectory ''workdir/part2'' of your git repo</span></span>
+<span id="cb11-18"><a></a><span class="do">## ℹ To disable this check, set the option 'orderly_git_error_ignore' to TRUE by</span></span>
+<span id="cb11-19"><a></a><span class="do">##   running `options(orderly_git_error_ignore = TRUE)`</span></span>
+<span id="cb11-20"><a></a><span class="do">##    description    paths</span></span>
+<span id="cb11-21"><a></a><span class="do">## 1 Cleaned data data.csv</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</section>
+<section id="more-metadata" class="slide level2 smaller">
+<h2>More metadata</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">orderly_description</span>(</span>
+<span id="cb12-2"><a></a>  <span class="at">display =</span> <span class="st">"Incoming data from Otherlandia"</span>,</span>
+<span id="cb12-3"><a></a>  <span class="at">long =</span> <span class="st">"Data as given to us from the MoH in Otherlandia."</span>,</span>
+<span id="cb12-4"><a></a>  <span class="at">custom =</span> <span class="fu">list</span>(<span class="at">received =</span> <span class="st">"2024-10-22"</span>))</span>
+<span id="cb12-5"><a></a><span class="fu">orderly_resource</span>(<span class="st">"data.xlsx"</span>)</span>
+<span id="cb12-6"><a></a><span class="fu">orderly_artefact</span>(<span class="at">files =</span> <span class="st">"data.csv"</span>, <span class="at">description =</span> <span class="st">"Cleaned data"</span>)</span>
+<span id="cb12-7"><a></a>d <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="st">"data.xlsx"</span>, <span class="at">sheet =</span> <span class="dv">2</span>, <span class="at">skip =</span> <span class="dv">2</span>)</span>
+<span id="cb12-8"><a></a><span class="fu">names</span>(d) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">" "</span>, <span class="st">"_"</span>, <span class="fu">tolower</span>(<span class="fu">names</span>(d)))</span>
+<span id="cb12-9"><a></a>d<span class="sc">$</span>date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(d<span class="sc">$</span>date)</span>
+<span id="cb12-10"><a></a><span class="fu">write.csv</span>(d, <span class="st">"data.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Running this:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>id <span class="ot">&lt;-</span> <span class="fu">orderly_run</span>(<span class="st">"incoming"</span>, <span class="at">echo =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb13-2"><a></a><span class="do">## Warning: Can't check if files are correctly gitignored</span></span>
+<span id="cb13-3"><a></a><span class="do">## ℹ Your outpack repo is in a subdirectory ''workdir/part2'' of your git repo</span></span>
+<span id="cb13-4"><a></a><span class="do">## ℹ To disable this check, set the option 'orderly_git_error_ignore' to TRUE by</span></span>
+<span id="cb13-5"><a></a><span class="do">##   running `options(orderly_git_error_ignore = TRUE)`</span></span>
+<span id="cb13-6"><a></a><span class="do">## ℹ Starting packet 'incoming' `20251007-071623-7af00ffb` at 2025-10-07 07:16:23.487372</span></span>
+<span id="cb13-7"><a></a><span class="do">## ✔ Finished running 'incoming.R'</span></span>
+<span id="cb13-8"><a></a><span class="do">## ℹ Finished 20251007-071623-7af00ffb at 2025-10-07 07:16:23.515404 (0.02803135 secs)</span></span>
+<span id="cb13-9"><a></a><span class="fu">orderly_metadata</span>(id)<span class="sc">$</span>custom<span class="sc">$</span>orderly<span class="sc">$</span>description</span>
+<span id="cb13-10"><a></a><span class="do">## Warning: Can't check if files are correctly gitignored</span></span>
+<span id="cb13-11"><a></a><span class="do">## ℹ Your outpack repo is in a subdirectory ''workdir/part2'' of your git repo</span></span>
+<span id="cb13-12"><a></a><span class="do">## ℹ To disable this check, set the option 'orderly_git_error_ignore' to TRUE by</span></span>
+<span id="cb13-13"><a></a><span class="do">##   running `options(orderly_git_error_ignore = TRUE)`</span></span>
+<span id="cb13-14"><a></a><span class="do">## $display</span></span>
+<span id="cb13-15"><a></a><span class="do">## [1] "Incoming data from Otherlandia"</span></span>
+<span id="cb13-16"><a></a><span class="do">## </span></span>
+<span id="cb13-17"><a></a><span class="do">## $long</span></span>
+<span id="cb13-18"><a></a><span class="do">## [1] "Data as given to us from the MoH in Otherlandia."</span></span>
+<span id="cb13-19"><a></a><span class="do">## </span></span>
+<span id="cb13-20"><a></a><span class="do">## $custom</span></span>
+<span id="cb13-21"><a></a><span class="do">## $custom$received</span></span>
+<span id="cb13-22"><a></a><span class="do">## [1] "2024-10-22"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="dependencies" class="slide level2">
+<h2>Dependencies</h2>
+<ul>
+<li>This is really the point of orderly</li>
+<li>You can pull in any file from any previously run packet</li>
+<li>You can use queries to select packets to depend on</li>
+</ul>
+<p><strong>Our aim</strong>: We want to use <code>data.csv</code> in some analysis</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="fu">orderly_new</span>(<span class="st">"analysis"</span>)</span>
+<span id="cb14-2"><a></a><span class="do">## Warning: Can't check if files are correctly gitignored</span></span>
+<span id="cb14-3"><a></a><span class="do">## ℹ Your outpack repo is in a subdirectory ''workdir/part2'' of your git repo</span></span>
+<span id="cb14-4"><a></a><span class="do">## ℹ To disable this check, set the option 'orderly_git_error_ignore' to TRUE by</span></span>
+<span id="cb14-5"><a></a><span class="do">##   running `options(orderly_git_error_ignore = TRUE)`</span></span>
+<span id="cb14-6"><a></a><span class="do">## ✔ Created 'src/analysis/analysis.R'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="setting-up-a-dependency" class="slide level2">
+<h2>Setting up a dependency</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="fu">orderly_dependency</span>(<span class="st">"incoming"</span>, <span class="st">"latest"</span>, <span class="st">"data.csv"</span>)</span>
+<span id="cb15-2"><a></a><span class="fu">orderly_artefact</span>(<span class="at">files =</span> <span class="fu">c</span>(<span class="st">"coverage-gf.png"</span>, <span class="st">"coverage-bf.png"</span>),</span>
+<span id="cb15-3"><a></a>                 <span class="at">description =</span> <span class="st">"Plots of coverage"</span>)</span>
+<span id="cb15-4"><a></a></span>
+<span id="cb15-5"><a></a>d <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data.csv"</span>)</span>
+<span id="cb15-6"><a></a>d<span class="sc">$</span>date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(d<span class="sc">$</span>date)</span>
+<span id="cb15-7"><a></a></span>
+<span id="cb15-8"><a></a><span class="fu">png</span>(<span class="st">"coverage-gf.png"</span>)</span>
+<span id="cb15-9"><a></a><span class="fu">plot</span>(gf_coverage <span class="sc">~</span> date, d, <span class="at">type =</span> <span class="st">"l"</span>)</span>
+<span id="cb15-10"><a></a><span class="fu">dev.off</span>()</span>
+<span id="cb15-11"><a></a></span>
+<span id="cb15-12"><a></a><span class="fu">png</span>(<span class="st">"coverage-bf.png"</span>)</span>
+<span id="cb15-13"><a></a><span class="fu">plot</span>(bf_coverage <span class="sc">~</span> date, d, <span class="at">type =</span> <span class="st">"l"</span>)</span>
+<span id="cb15-14"><a></a><span class="fu">dev.off</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This is the only file within our analysis directory:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>fs<span class="sc">::</span><span class="fu">dir_tree</span>(<span class="st">"workdir/part2/src/analysis"</span>)</span>
+<span id="cb16-2"><a></a><span class="do">## workdir/part2/src/analysis</span></span>
+<span id="cb16-3"><a></a><span class="do">## └── analysis.R</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="running-the-report" class="slide level2 smaller">
+<h2>Running the report</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>id <span class="ot">&lt;-</span> <span class="fu">orderly_run</span>(<span class="st">"analysis"</span>)</span>
+<span id="cb17-2"><a></a><span class="do">## Warning: Can't check if files are correctly gitignored</span></span>
+<span id="cb17-3"><a></a><span class="do">## ℹ Your outpack repo is in a subdirectory ''workdir/part2'' of your git repo</span></span>
+<span id="cb17-4"><a></a><span class="do">## ℹ To disable this check, set the option 'orderly_git_error_ignore' to TRUE by</span></span>
+<span id="cb17-5"><a></a><span class="do">##   running `options(orderly_git_error_ignore = TRUE)`</span></span>
+<span id="cb17-6"><a></a><span class="do">## ℹ Starting packet 'analysis' `20251007-071623-a4bac89a` at 2025-10-07 07:16:23.651198</span></span>
+<span id="cb17-7"><a></a><span class="do">## &gt; orderly_dependency("incoming", "latest", "data.csv")</span></span>
+<span id="cb17-8"><a></a><span class="do">## ℹ Depending on incoming @ `20251007-071623-7af00ffb` (via latest(name == "incoming"))</span></span>
+<span id="cb17-9"><a></a><span class="do">## &gt; orderly_artefact(files = c("coverage-gf.png", "coverage-bf.png"),</span></span>
+<span id="cb17-10"><a></a><span class="do">## +                  description = "Plots of coverage")</span></span>
+<span id="cb17-11"><a></a><span class="do">## &gt; d &lt;- read.csv("data.csv")</span></span>
+<span id="cb17-12"><a></a><span class="do">## &gt; d$date &lt;- as.Date(d$date)</span></span>
+<span id="cb17-13"><a></a><span class="do">## &gt; png("coverage-gf.png")</span></span>
+<span id="cb17-14"><a></a><span class="do">## &gt; plot(gf_coverage ~ date, d, type = "l")</span></span>
+<span id="cb17-15"><a></a><span class="do">## &gt; dev.off()</span></span>
+<span id="cb17-16"><a></a><span class="do">## png </span></span>
+<span id="cb17-17"><a></a><span class="do">##   2 </span></span>
+<span id="cb17-18"><a></a><span class="do">## &gt; png("coverage-bf.png")</span></span>
+<span id="cb17-19"><a></a><span class="do">## &gt; plot(bf_coverage ~ date, d, type = "l")</span></span>
+<span id="cb17-20"><a></a><span class="do">## &gt; dev.off()</span></span>
+<span id="cb17-21"><a></a><span class="do">## png </span></span>
+<span id="cb17-22"><a></a><span class="do">##   2</span></span>
+<span id="cb17-23"><a></a><span class="do">## ✔ Finished running 'analysis.R'</span></span>
+<span id="cb17-24"><a></a><span class="do">## ℹ Finished 20251007-071623-a4bac89a at 2025-10-07 07:16:23.752157 (0.1009593 secs)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="the-aftermath" class="slide level2 smaller">
+<h2>The aftermath</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>fs<span class="sc">::</span><span class="fu">dir_tree</span>(<span class="st">"workdir/part2"</span>)</span>
+<span id="cb18-2"><a></a><span class="do">## workdir/part2</span></span>
+<span id="cb18-3"><a></a><span class="do">## ├── archive</span></span>
+<span id="cb18-4"><a></a><span class="do">## │   ├── analysis</span></span>
+<span id="cb18-5"><a></a><span class="do">## │   │   └── 20251007-071623-a4bac89a</span></span>
+<span id="cb18-6"><a></a><span class="do">## │   │       ├── analysis.R</span></span>
+<span id="cb18-7"><a></a><span class="do">## │   │       ├── coverage-bf.png</span></span>
+<span id="cb18-8"><a></a><span class="do">## │   │       ├── coverage-gf.png</span></span>
+<span id="cb18-9"><a></a><span class="do">## │   │       └── data.csv</span></span>
+<span id="cb18-10"><a></a><span class="do">## │   └── incoming</span></span>
+<span id="cb18-11"><a></a><span class="do">## │       ├── 20251007-071623-1226e67d</span></span>
+<span id="cb18-12"><a></a><span class="do">## │       │   ├── data.csv</span></span>
+<span id="cb18-13"><a></a><span class="do">## │       │   ├── data.xlsx</span></span>
+<span id="cb18-14"><a></a><span class="do">## │       │   └── incoming.R</span></span>
+<span id="cb18-15"><a></a><span class="do">## │       ├── 20251007-071623-3df771be</span></span>
+<span id="cb18-16"><a></a><span class="do">## │       │   ├── data.csv</span></span>
+<span id="cb18-17"><a></a><span class="do">## │       │   ├── data.xlsx</span></span>
+<span id="cb18-18"><a></a><span class="do">## │       │   └── incoming.R</span></span>
+<span id="cb18-19"><a></a><span class="do">## │       ├── 20251007-071623-5dae8f81</span></span>
+<span id="cb18-20"><a></a><span class="do">## │       │   ├── data.csv</span></span>
+<span id="cb18-21"><a></a><span class="do">## │       │   ├── data.xlsx</span></span>
+<span id="cb18-22"><a></a><span class="do">## │       │   └── incoming.R</span></span>
+<span id="cb18-23"><a></a><span class="do">## │       └── 20251007-071623-7af00ffb</span></span>
+<span id="cb18-24"><a></a><span class="do">## │           ├── data.csv</span></span>
+<span id="cb18-25"><a></a><span class="do">## │           ├── data.xlsx</span></span>
+<span id="cb18-26"><a></a><span class="do">## │           └── incoming.R</span></span>
+<span id="cb18-27"><a></a><span class="do">## ├── draft</span></span>
+<span id="cb18-28"><a></a><span class="do">## │   ├── analysis</span></span>
+<span id="cb18-29"><a></a><span class="do">## │   └── incoming</span></span>
+<span id="cb18-30"><a></a><span class="do">## ├── orderly_config.json</span></span>
+<span id="cb18-31"><a></a><span class="do">## └── src</span></span>
+<span id="cb18-32"><a></a><span class="do">##     ├── analysis</span></span>
+<span id="cb18-33"><a></a><span class="do">##     │   └── analysis.R</span></span>
+<span id="cb18-34"><a></a><span class="do">##     └── incoming</span></span>
+<span id="cb18-35"><a></a><span class="do">##         ├── data.xlsx</span></span>
+<span id="cb18-36"><a></a><span class="do">##         └── incoming.R</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="some-comments-on-this" class="slide level2">
+<h2>Some comments on this</h2>
+<ul>
+<li>The <code>data.csv</code> file has been copied from the final copy of <code>incoming</code> into <code>analysis</code></li>
+<li>The dependency system works interactively too (try it!)</li>
+<li>The logs indicate how dependency resolution occurred</li>
+<li>Metadata about the dependencies is included:</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a><span class="fu">orderly_metadata</span>(id)<span class="sc">$</span>depends</span>
+<span id="cb19-2"><a></a><span class="do">## Warning: Can't check if files are correctly gitignored</span></span>
+<span id="cb19-3"><a></a><span class="do">## ℹ Your outpack repo is in a subdirectory ''workdir/part2'' of your git repo</span></span>
+<span id="cb19-4"><a></a><span class="do">## ℹ To disable this check, set the option 'orderly_git_error_ignore' to TRUE by</span></span>
+<span id="cb19-5"><a></a><span class="do">##   running `options(orderly_git_error_ignore = TRUE)`</span></span>
+<span id="cb19-6"><a></a><span class="do">##                     packet                      query        files</span></span>
+<span id="cb19-7"><a></a><span class="do">## 1 20251007-071623-7af00ffb latest(name == "incoming") data.csv....</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="using-specific-versions" class="slide level2">
+<h2>Using specific versions</h2>
+<pre><code>## Warning: Can't check if files are correctly gitignored
+## ℹ Your outpack repo is in a subdirectory ''workdir/part2'' of your git repo
+## ℹ To disable this check, set the option 'orderly_git_error_ignore' to TRUE by
+##   running `options(orderly_git_error_ignore = TRUE)`
+orderly_dependency("incoming", "20251007-071623-3df771be", "data.csv")
+orderly_artefact(files = c("coverage-gf.png", "coverage-bf.png"),
+                 description = "Plots of coverage")
+
+d &lt;- read.csv("data.csv")
+d$date &lt;- as.Date(d$date)
+
+png("coverage-gf.png")
+plot(gf_coverage ~ date, d, type = "l")
+dev.off()
+
+png("coverage-bf.png")
+plot(bf_coverage ~ date, d, type = "l")
+dev.off()</code></pre>
+</section>
+<section id="running-this" class="slide level2 smaller">
+<h2>Running this</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a>id <span class="ot">&lt;-</span> <span class="fu">orderly_run</span>(<span class="st">"analysis"</span>)</span>
+<span id="cb21-2"><a></a><span class="do">## Warning: Can't check if files are correctly gitignored</span></span>
+<span id="cb21-3"><a></a><span class="do">## ℹ Your outpack repo is in a subdirectory ''workdir/part2'' of your git repo</span></span>
+<span id="cb21-4"><a></a><span class="do">## ℹ To disable this check, set the option 'orderly_git_error_ignore' to TRUE by</span></span>
+<span id="cb21-5"><a></a><span class="do">##   running `options(orderly_git_error_ignore = TRUE)`</span></span>
+<span id="cb21-6"><a></a><span class="do">## ℹ Starting packet 'analysis' `20251007-071623-e07b6675` at 2025-10-07 07:16:23.881566</span></span>
+<span id="cb21-7"><a></a><span class="do">## &gt; orderly_dependency("incoming", "20251007-071623-3df771be", "data.csv")</span></span>
+<span id="cb21-8"><a></a><span class="do">## ℹ Depending on incoming @ `20251007-071623-3df771be` (via single(id == "20251007-071623-3df771be" &amp;&amp; name == "incoming"))</span></span>
+<span id="cb21-9"><a></a><span class="do">## &gt; orderly_artefact(files = c("coverage-gf.png", "coverage-bf.png"),</span></span>
+<span id="cb21-10"><a></a><span class="do">## +                  description = "Plots of coverage")</span></span>
+<span id="cb21-11"><a></a><span class="do">## &gt; d &lt;- read.csv("data.csv")</span></span>
+<span id="cb21-12"><a></a><span class="do">## &gt; d$date &lt;- as.Date(d$date)</span></span>
+<span id="cb21-13"><a></a><span class="do">## &gt; png("coverage-gf.png")</span></span>
+<span id="cb21-14"><a></a><span class="do">## &gt; plot(gf_coverage ~ date, d, type = "l")</span></span>
+<span id="cb21-15"><a></a><span class="do">## &gt; dev.off()</span></span>
+<span id="cb21-16"><a></a><span class="do">## png </span></span>
+<span id="cb21-17"><a></a><span class="do">##   2 </span></span>
+<span id="cb21-18"><a></a><span class="do">## &gt; png("coverage-bf.png")</span></span>
+<span id="cb21-19"><a></a><span class="do">## &gt; plot(bf_coverage ~ date, d, type = "l")</span></span>
+<span id="cb21-20"><a></a><span class="do">## &gt; dev.off()</span></span>
+<span id="cb21-21"><a></a><span class="do">## png </span></span>
+<span id="cb21-22"><a></a><span class="do">##   2</span></span>
+<span id="cb21-23"><a></a><span class="do">## ✔ Finished running 'analysis.R'</span></span>
+<span id="cb21-24"><a></a><span class="do">## ℹ Finished 20251007-071623-e07b6675 at 2025-10-07 07:16:23.949836 (0.06827044 secs)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>with metadata</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a><span class="fu">orderly_metadata</span>(id)<span class="sc">$</span>depends</span>
+<span id="cb22-2"><a></a><span class="do">## Warning: Can't check if files are correctly gitignored</span></span>
+<span id="cb22-3"><a></a><span class="do">## ℹ Your outpack repo is in a subdirectory ''workdir/part2'' of your git repo</span></span>
+<span id="cb22-4"><a></a><span class="do">## ℹ To disable this check, set the option 'orderly_git_error_ignore' to TRUE by</span></span>
+<span id="cb22-5"><a></a><span class="do">##   running `options(orderly_git_error_ignore = TRUE)`</span></span>
+<span id="cb22-6"><a></a><span class="do">##                     packet</span></span>
+<span id="cb22-7"><a></a><span class="do">## 1 20251007-071623-3df771be</span></span>
+<span id="cb22-8"><a></a><span class="do">##                                                            query        files</span></span>
+<span id="cb22-9"><a></a><span class="do">## 1 single(id == "20251007-071623-3df771be" &amp;&amp; name == "incoming") data.csv....</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="a-more-realistic-example" class="slide level2 smaller">
+<h2>A more realistic example</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="fu">orderly_new</span>(<span class="st">"wuenic"</span>)</span>
+<span id="cb23-2"><a></a><span class="do">## Warning: Can't check if files are correctly gitignored</span></span>
+<span id="cb23-3"><a></a><span class="do">## ℹ Your outpack repo is in a subdirectory ''workdir/part2'' of your git repo</span></span>
+<span id="cb23-4"><a></a><span class="do">## ℹ To disable this check, set the option 'orderly_git_error_ignore' to TRUE by</span></span>
+<span id="cb23-5"><a></a><span class="do">##   running `options(orderly_git_error_ignore = TRUE)`</span></span>
+<span id="cb23-6"><a></a><span class="do">## ✔ Created 'src/wuenic/wuenic.R'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>A real analysis courtesty of <a href="https://profiles.imperial.ac.uk/k.gaythorpe">Katy Gaythorpe</a>, <a href="https://github.com/mrc-ide/orderly-tutorial/raw/refs/heads/main/inputs/part2/wuenic.xlsx">using <code>wuenic.xlsx</code></a></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a><span class="fu">orderly_resource</span>(<span class="st">"wuenic.xlsx"</span>)</span>
+<span id="cb24-2"><a></a><span class="fu">orderly_artefact</span>(</span>
+<span id="cb24-3"><a></a>  <span class="at">files =</span> <span class="st">"wuenic.rds"</span>,</span>
+<span id="cb24-4"><a></a>  <span class="at">description =</span> <span class="st">"Tidied WUENIC data"</span>)</span>
+<span id="cb24-5"><a></a><span class="fu">orderly_artefact</span>(</span>
+<span id="cb24-6"><a></a>  <span class="at">files =</span> <span class="st">"corr_out.rds"</span>,</span>
+<span id="cb24-7"><a></a>  <span class="at">description =</span> <span class="st">"Output correlations between WUENIC and OFFICIAL coverage"</span>)</span>
+<span id="cb24-8"><a></a><span class="co"># -------------------------------------------------------------------------</span></span>
+<span id="cb24-9"><a></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb24-10"><a></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb24-11"><a></a><span class="fu">library</span>(readxl)</span>
+<span id="cb24-12"><a></a><span class="fu">library</span>(janitor)</span>
+<span id="cb24-13"><a></a></span>
+<span id="cb24-14"><a></a>df <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"wuenic.xlsx"</span>)</span>
+<span id="cb24-15"><a></a></span>
+<span id="cb24-16"><a></a><span class="co"># Question: is there better agreement in coverage estimates for BCG or YF</span></span>
+<span id="cb24-17"><a></a></span>
+<span id="cb24-18"><a></a><span class="co"># some cleaning</span></span>
+<span id="cb24-19"><a></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">clean_names</span>()</span>
+<span id="cb24-20"><a></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">starts_with</span>(<span class="st">"x"</span>),</span>
+<span id="cb24-21"><a></a>                           <span class="at">.fns =</span> <span class="cf">function</span>(inp) <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">"%"</span>, <span class="st">""</span>, inp))))</span>
+<span id="cb24-22"><a></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">all_na_coverage =</span> <span class="fu">if_all</span>(<span class="fu">starts_with</span>(<span class="st">"x"</span>), is.na))</span>
+<span id="cb24-23"><a></a></span>
+<span id="cb24-24"><a></a><span class="co"># quick visual for 2023</span></span>
+<span id="cb24-25"><a></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb24-26"><a></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(antigen)) <span class="sc">%&gt;%</span></span>
+<span id="cb24-27"><a></a>  <span class="fu">filter</span>(country_region <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Nigeria"</span>, <span class="st">"Senegal"</span>, <span class="st">"Kenya"</span>, <span class="st">"Ghana"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb24-28"><a></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb24-29"><a></a>  <span class="fu">aes</span>(<span class="at">x =</span> country_region, <span class="at">y =</span> x2023,  <span class="at">fill =</span> category) <span class="sc">+</span></span>
+<span id="cb24-30"><a></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb24-31"><a></a>  <span class="fu">facet_wrap</span>(antigen <span class="sc">~</span> ., <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb24-32"><a></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb24-33"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Country"</span>, <span class="at">y =</span> <span class="st">"Coverage in 2023"</span>, <span class="at">fill =</span> <span class="st">"Coverage type"</span>)</span>
+<span id="cb24-34"><a></a></span>
+<span id="cb24-35"><a></a><span class="co"># get correlations per vaccine and country</span></span>
+<span id="cb24-36"><a></a>get_ma_corr <span class="ot">&lt;-</span> <span class="cf">function</span>(df, <span class="at">country_reg_in =</span> <span class="st">"Afghanistan"</span>,</span>
+<span id="cb24-37"><a></a>                        <span class="at">antigen_in =</span> <span class="st">"Yellow fever vaccine"</span>) {</span>
+<span id="cb24-38"><a></a>  df_subset <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(country_region <span class="sc">%in%</span> country_reg_in,</span>
+<span id="cb24-39"><a></a>                             antigen <span class="sc">%in%</span> antigen_in)</span>
+<span id="cb24-40"><a></a></span>
+<span id="cb24-41"><a></a>  <span class="fu">cor</span>(<span class="fu">t</span>(df_subset[df_subset<span class="sc">$</span>category <span class="sc">%in%</span> <span class="st">"WUENIC"</span>, <span class="fu">grep</span>(<span class="st">"^x"</span>, <span class="fu">names</span>(df))]),</span>
+<span id="cb24-42"><a></a>      <span class="fu">t</span>(df_subset[df_subset<span class="sc">$</span>category <span class="sc">%in%</span> <span class="st">"OFFICIAL"</span>, <span class="fu">grep</span>(<span class="st">"^x"</span>, <span class="fu">names</span>(df))]),</span>
+<span id="cb24-43"><a></a>      <span class="at">use =</span> <span class="st">"na.or.complete"</span>)</span>
+<span id="cb24-44"><a></a>}</span>
+<span id="cb24-45"><a></a></span>
+<span id="cb24-46"><a></a>df_out <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">country =</span> <span class="fu">unique</span>(df<span class="sc">$</span>country_region))</span>
+<span id="cb24-47"><a></a>df_out<span class="sc">$</span>YF_cor <span class="ot">&lt;-</span> <span class="fu">sapply</span>(df_out<span class="sc">$</span>country, <span class="cf">function</span>(x) <span class="fu">get_ma_corr</span>(df, x))</span>
+<span id="cb24-48"><a></a>df_out<span class="sc">$</span>BCG_cor <span class="ot">&lt;-</span> <span class="fu">sapply</span>(df_out<span class="sc">$</span>country, <span class="cf">function</span>(x) <span class="fu">get_ma_corr</span>(df, x, <span class="st">"BCG"</span>))</span>
+<span id="cb24-49"><a></a></span>
+<span id="cb24-50"><a></a><span class="co"># get a nice figure</span></span>
+<span id="cb24-51"><a></a>p <span class="ot">&lt;-</span> df_out <span class="sc">%&gt;%</span></span>
+<span id="cb24-52"><a></a>  <span class="fu">mutate</span>(<span class="at">cor_diff =</span> <span class="fu">as.numeric</span>(BCG_cor) <span class="sc">-</span> <span class="fu">as.numeric</span>(YF_cor)) <span class="sc">%&gt;%</span></span>
+<span id="cb24-53"><a></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(cor_diff)) <span class="sc">%&gt;%</span></span>
+<span id="cb24-54"><a></a>  <span class="fu">mutate</span>(<span class="at">pos_neg =</span> cor_diff <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb24-55"><a></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb24-56"><a></a>  <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(country, cor_diff), <span class="at">y =</span> cor_diff, <span class="at">fill =</span> pos_neg) <span class="sc">+</span></span>
+<span id="cb24-57"><a></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb24-58"><a></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb24-59"><a></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb24-60"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Country"</span>, <span class="at">y =</span> <span class="st">"Difference in correlation"</span>,</span>
+<span id="cb24-61"><a></a>       <span class="at">fill =</span> <span class="st">"BCG has better </span><span class="sc">\n</span><span class="st">agreement between </span><span class="sc">\n</span><span class="st">WUENIC and OFFICIAL </span><span class="sc">\n</span><span class="st">coverage than YF"</span>) <span class="sc">+</span></span>
+<span id="cb24-62"><a></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"yellow"</span>, <span class="st">"pink"</span>)) <span class="sc">+</span></span>
+<span id="cb24-63"><a></a>  <span class="fu">ggtitle</span>(<span class="st">"Yellow fever vaccination coverage has better agreement between WUENIC and OFFICIAL estimates in more countries than BCG"</span>)</span>
+<span id="cb24-64"><a></a></span>
+<span id="cb24-65"><a></a><span class="co"># save everything</span></span>
+<span id="cb24-66"><a></a><span class="fu">ggsave</span>(<span class="at">plot =</span> p, <span class="at">filename =</span> <span class="st">"BCG_YF_correlation_comparison.png"</span>,</span>
+<span id="cb24-67"><a></a>       <span class="at">width =</span> <span class="dv">14</span>, <span class="at">height =</span> <span class="dv">8</span>)</span>
+<span id="cb24-68"><a></a><span class="fu">saveRDS</span>(df, <span class="st">"wuenic.rds"</span>)</span>
+<span id="cb24-69"><a></a><span class="fu">saveRDS</span>(df_out, <span class="st">"corr_out.rds"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="running-this-1" class="slide level2">
+<h2>Running this</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a>id <span class="ot">&lt;-</span> <span class="fu">orderly_run</span>(<span class="st">"wuenic"</span>, <span class="at">echo =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb25-2"><a></a><span class="do">## Warning: Can't check if files are correctly gitignored</span></span>
+<span id="cb25-3"><a></a><span class="do">## ℹ Your outpack repo is in a subdirectory ''workdir/part2'' of your git repo</span></span>
+<span id="cb25-4"><a></a><span class="do">## ℹ To disable this check, set the option 'orderly_git_error_ignore' to TRUE by</span></span>
+<span id="cb25-5"><a></a><span class="do">##   running `options(orderly_git_error_ignore = TRUE)`</span></span>
+<span id="cb25-6"><a></a><span class="do">## ℹ Starting packet 'wuenic' `20251007-071624-1130f836` at 2025-10-07 07:16:24.072161</span></span>
+<span id="cb25-7"><a></a><span class="do">## </span></span>
+<span id="cb25-8"><a></a><span class="do">## Attaching package: 'dplyr'</span></span>
+<span id="cb25-9"><a></a><span class="do">## The following objects are masked from 'package:stats':</span></span>
+<span id="cb25-10"><a></a><span class="do">## </span></span>
+<span id="cb25-11"><a></a><span class="do">##     filter, lag</span></span>
+<span id="cb25-12"><a></a><span class="do">## The following objects are masked from 'package:base':</span></span>
+<span id="cb25-13"><a></a><span class="do">## </span></span>
+<span id="cb25-14"><a></a><span class="do">##     intersect, setdiff, setequal, union</span></span>
+<span id="cb25-15"><a></a><span class="do">## </span></span>
+<span id="cb25-16"><a></a><span class="do">## Attaching package: 'janitor'</span></span>
+<span id="cb25-17"><a></a><span class="do">## The following objects are masked from 'package:stats':</span></span>
+<span id="cb25-18"><a></a><span class="do">## </span></span>
+<span id="cb25-19"><a></a><span class="do">##     chisq.test, fisher.test</span></span>
+<span id="cb25-20"><a></a><span class="do">## Warning in cor(t(df_subset[df_subset$category %in% "WUENIC", grep("^x", : the</span></span>
+<span id="cb25-21"><a></a><span class="do">## standard deviation is zero</span></span>
+<span id="cb25-22"><a></a><span class="do">## Warning in cor(t(df_subset[df_subset$category %in% "WUENIC", grep("^x", : the</span></span>
+<span id="cb25-23"><a></a><span class="do">## standard deviation is zero</span></span>
+<span id="cb25-24"><a></a><span class="do">## Warning in cor(t(df_subset[df_subset$category %in% "WUENIC", grep("^x", : the</span></span>
+<span id="cb25-25"><a></a><span class="do">## standard deviation is zero</span></span>
+<span id="cb25-26"><a></a><span class="do">## Warning in cor(t(df_subset[df_subset$category %in% "WUENIC", grep("^x", : the</span></span>
+<span id="cb25-27"><a></a><span class="do">## standard deviation is zero</span></span>
+<span id="cb25-28"><a></a><span class="do">## Warning in cor(t(df_subset[df_subset$category %in% "WUENIC", grep("^x", : the</span></span>
+<span id="cb25-29"><a></a><span class="do">## standard deviation is zero</span></span>
+<span id="cb25-30"><a></a><span class="do">## Warning in cor(t(df_subset[df_subset$category %in% "WUENIC", grep("^x", : the</span></span>
+<span id="cb25-31"><a></a><span class="do">## standard deviation is zero</span></span>
+<span id="cb25-32"><a></a><span class="do">## ✔ Finished running 'wuenic.R'</span></span>
+<span id="cb25-33"><a></a><span class="do">## ! 6 warnings found:</span></span>
+<span id="cb25-34"><a></a><span class="do">## • the standard deviation is zero</span></span>
+<span id="cb25-35"><a></a><span class="do">## • the standard deviation is zero</span></span>
+<span id="cb25-36"><a></a><span class="do">## • the standard deviation is zero</span></span>
+<span id="cb25-37"><a></a><span class="do">## • the standard deviation is zero</span></span>
+<span id="cb25-38"><a></a><span class="do">## • the standard deviation is zero</span></span>
+<span id="cb25-39"><a></a><span class="do">## • the standard deviation is zero</span></span>
+<span id="cb25-40"><a></a><span class="do">## ℹ Finished 20251007-071624-1130f836 at 2025-10-07 07:16:26.292974 (2.220813 secs)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="the-result" class="slide level2">
+<h2>The result</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a>fs<span class="sc">::</span><span class="fu">dir_tree</span>(<span class="st">"workdir/part2/archive/wuenic"</span>)</span>
+<span id="cb26-2"><a></a><span class="do">## workdir/part2/archive/wuenic</span></span>
+<span id="cb26-3"><a></a><span class="do">## └── 20251007-071624-1130f836</span></span>
+<span id="cb26-4"><a></a><span class="do">##     ├── BCG_YF_correlation_comparison.png</span></span>
+<span id="cb26-5"><a></a><span class="do">##     ├── corr_out.rds</span></span>
+<span id="cb26-6"><a></a><span class="do">##     ├── wuenic.R</span></span>
+<span id="cb26-7"><a></a><span class="do">##     ├── wuenic.rds</span></span>
+<span id="cb26-8"><a></a><span class="do">##     └── wuenic.xlsx</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="in-graphical-form" class="slide level2">
+<h2>In graphical form</h2>
+
+<img data-src="../workdir/part2/archive/wuenic/20251007-071624-1130f836/BCG_YF_correlation_comparison.png" class="r-stretch"></section>
+<section id="documentation" class="slide level2">
+<h2>Documentation</h2>
+<p><a href="https://mrc-ide.github.io/orderly/reference/index.html#from-within-a-running-report" data-preview-link="true">The orderly reference</a></p>
+</section>
+<section id="remaining-questions" class="slide level2">
+<h2>Remaining questions</h2>
+<ul>
+<li>Where do we put our starting data?</li>
+<li>How do we use Katy’s processed data <code>wuenic.rds</code>?</li>
+<li>What about custom packages?</li>
+<li>What about custom reusable code snippets, data and metadata?</li>
+</ul>
+</section>
+<section id="next-steps" class="slide level2">
+<h2>Next steps</h2>
+<ul>
+<li>On to <a href="collaboration.html">collaboration</a></li>
+<li>Back to the <a href="..">project root</a></li>
+<li>Back to the <a href="getting-started.html">geting started</a></li>
+</ul>
+
+
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+<p><a href="..">mrc-ide/orderly-tutorial</a></p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': true,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>
