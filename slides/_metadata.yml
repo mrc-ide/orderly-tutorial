@@ -2,6 +2,7 @@ format:
   revealjs:
     preview-links: auto
     footer: "[mrc-ide/orderly-tutorial](..)"
+    scrollable: true
 execute:
   echo: true
   message: true
